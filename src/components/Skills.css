@@ -1,0 +1,16 @@
+.skills-bg { background: var(--bg2); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.skill-group-title {
+  font-size: 0.95rem;
+  color: var(--text-h);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }

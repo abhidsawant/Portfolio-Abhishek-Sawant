@@ -1,0 +1,21 @@
+.projects-bg { background: var(--bg2); }
+
+.projects-grid { display: flex; flex-direction: column; gap: 24px; }
+
+.project-card { display: flex; flex-direction: column; gap: 16px; }
+
+.project-header { display: flex; justify-content: space-between; align-items: flex-start; }
+
+.project-name { font-size: 1.2rem; margin-bottom: 4px; }
+.project-subtitle { color: var(--accent2); font-size: 0.88rem; }
+.project-desc { line-height: 1.7; font-size: 0.93rem; }
+
+.project-highlights {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.project-highlights li { font-size: 0.9rem; line-height: 1.6; }
+
+.project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
