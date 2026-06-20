@@ -1,6 +1,14 @@
 .exp-list { display: flex; flex-direction: column; gap: 24px; }
 
-.exp-card { position: relative; }
+.exp-card {
+  position: relative;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.exp-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(124,106,255,0.2);
+  border-color: rgba(124,106,255,0.4);
+}
 .exp-card::before {
   content: '';
   position: absolute;

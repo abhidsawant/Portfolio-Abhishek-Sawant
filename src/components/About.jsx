@@ -1,3 +1,4 @@
+import useInView from '../hooks/useInView'
 import './About.css'
 
 const stats = [
@@ -8,12 +9,14 @@ const stats = [
 ]
 
 export default function About() {
+  const [ref, inView] = useInView()
+
   return (
-    <section id="about" className="section">
+    <section id="about" className="section" ref={ref}>
       <div className="container">
         <h2 className="section-title">About Me</h2>
         <div className="about-grid">
-          <div className="about-text card">
+          <div className={`about-text card reveal ${inView ? 'visible' : ''}`}>
             <p>
               Results-driven React.js Developer with 1+ year of experience building high-performance,
               scalable frontend applications for clinical data platforms in the pharmaceutical domain.
@@ -29,8 +32,12 @@ export default function About() {
             </p>
           </div>
           <div className="about-stats">
-            {stats.map(s => (
-              <div key={s.label} className="stat-card card">
+            {stats.map((s, i) => (
+              <div
+                key={s.label}
+                className={`stat-card card reveal-scale ${inView ? 'visible' : ''}`}
+                style={{ transitionDelay: `${0.1 + i * 0.1}s` }}
+              >
                 <span className="stat-value">{s.value}</span>
                 <span className="stat-label">{s.label}</span>
               </div>

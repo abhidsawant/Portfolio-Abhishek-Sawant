@@ -1,3 +1,4 @@
+import useInView from '../hooks/useInView'
 import './Experience.css'
 
 const jobs = [
@@ -34,22 +35,26 @@ const jobs = [
 ]
 
 export default function Experience() {
+  const [ref, inView] = useInView()
+
   return (
-    <section id="experience" className="section">
+    <section id="experience" className="section" ref={ref}>
       <div className="container">
         <h2 className="section-title">Experience</h2>
         <div className="exp-list">
           {jobs.map((job, i) => (
-            <div key={i} className="card exp-card">
+            <div
+              key={i}
+              className={`card exp-card reveal ${inView ? 'visible' : ''}`}
+              style={{ transitionDelay: `${i * 0.15}s` }}
+            >
               <div className="exp-header">
                 <div>
                   <h3 className="exp-role">{job.role}</h3>
                   <p className="exp-company">{job.company} · {job.location}</p>
                 </div>
                 <div className="exp-header-right">
-                  {job.award && (
-                    <span className="exp-award">🏆 {job.award}</span>
-                  )}
+                  {job.award && <span className="exp-award">🏆 {job.award}</span>}
                   <span className="exp-period tag">{job.period}</span>
                 </div>
               </div>

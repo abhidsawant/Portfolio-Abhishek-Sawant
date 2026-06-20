@@ -19,6 +19,11 @@
   font-weight: 700;
   color: var(--accent2);
   letter-spacing: 1px;
+  transition: text-shadow 0.3s;
+}
+.nav-logo:hover {
+  text-shadow: 0 0 16px rgba(167,139,250,0.8);
+  color: var(--accent2);
 }
 
 .nav-links {
@@ -32,10 +37,21 @@
   color: var(--text);
   font-size: 0.9rem;
   font-weight: 500;
+  position: relative;
   transition: color 0.2s;
 }
-
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--accent2);
+  transition: width 0.25s ease;
+}
 .nav-links a:hover { color: var(--text-h); }
+.nav-links a:hover::after { width: 100%; }
 
 .nav-cta {
   background: var(--accent);

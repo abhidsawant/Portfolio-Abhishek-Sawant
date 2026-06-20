@@ -2,7 +2,17 @@
 
 .projects-grid { display: flex; flex-direction: column; gap: 24px; }
 
-.project-card { display: flex; flex-direction: column; gap: 16px; }
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(124,106,255,0.2);
+  border-color: rgba(124,106,255,0.4);
+}
 
 .project-header { display: flex; justify-content: space-between; align-items: flex-start; }
 

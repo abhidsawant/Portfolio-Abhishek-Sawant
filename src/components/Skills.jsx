@@ -1,9 +1,10 @@
+import useInView from '../hooks/useInView'
 import './Skills.css'
 
 const groups = [
   {
     title: 'Languages & Frameworks',
-    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'React Native', 'Next.js', 'React Hooks', 'Redux', 'Node.js', 'Express.js'],
+    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'React Hooks', 'Redux', 'Node.js', 'Express.js'],
   },
   {
     title: 'UI & Styling',
@@ -24,16 +25,30 @@ const groups = [
 ]
 
 export default function Skills() {
+  const [ref, inView] = useInView()
+
   return (
-    <section id="skills" className="section skills-bg">
+    <section id="skills" className="section skills-bg" ref={ref}>
       <div className="container">
         <h2 className="section-title">Technical Skills</h2>
         <div className="skills-grid">
-          {groups.map(g => (
-            <div key={g.title} className="card skill-group">
+          {groups.map((g, i) => (
+            <div
+              key={g.title}
+              className={`card skill-group reveal ${inView ? 'visible' : ''}`}
+              style={{ transitionDelay: `${i * 0.1}s` }}
+            >
               <h3 className="skill-group-title">{g.title}</h3>
               <div className="skill-tags">
-                {g.skills.map(s => <span key={s} className="tag">{s}</span>)}
+                {g.skills.map((s, j) => (
+                  <span
+                    key={s}
+                    className={`tag skill-tag ${inView ? 'tag-visible' : ''}`}
+                    style={{ animationDelay: `${0.2 + i * 0.1 + j * 0.05}s` }}
+                  >
+                    {s}
+                  </span>
+                ))}
               </div>
             </div>
           ))}

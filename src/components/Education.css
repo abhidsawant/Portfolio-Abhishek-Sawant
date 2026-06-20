@@ -1,2 +1,11 @@
 .edu-degree { font-size: 1.1rem; margin-bottom: 6px; }
 .edu-school { color: var(--accent2); font-size: 0.9rem; }
+
+.edu-card {
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.edu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(124,106,255,0.2);
+  border-color: rgba(124,106,255,0.4);
+}

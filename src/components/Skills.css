@@ -6,6 +6,15 @@
   gap: 20px;
 }
 
+.skill-group {
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.skill-group:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(124,106,255,0.2);
+  border-color: rgba(124,106,255,0.4);
+}
+
 .skill-group-title {
   font-size: 0.95rem;
   color: var(--text-h);
@@ -14,3 +23,17 @@
 }
 
 .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.skill-tag {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: transform 0.15s, background 0.2s;
+}
+.skill-tag.tag-visible {
+  animation: scaleIn 0.35s ease forwards;
+}
+.skill-tag:hover {
+  background: rgba(124,106,255,0.25);
+  transform: scale(1.08);
+  cursor: default;
+}
