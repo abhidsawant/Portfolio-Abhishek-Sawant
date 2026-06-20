@@ -1,18 +1,32 @@
 import { useState } from 'react'
 import './Contact.css'
 
+const FORMSPREE_URL = 'https://formspree.io/f/xwvjgzko'
+
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | loading | success | error
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
-    const { name, email, message } = form
-    const mailto = `mailto:abhisheksawant732003@gmail.com?subject=Hiring Inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`
-    window.location.href = mailto
-    setSent(true)
+    setStatus('loading')
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (res.ok) {
+        setStatus('success')
+        setForm({ name: '', email: '', message: '' })
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -46,20 +60,27 @@ export default function Contact() {
           </div>
 
           <form className="card contact-form" onSubmit={handleSubmit}>
-            {sent && <p className="form-success">✅ Opening your email client...</p>}
+            {status === 'success' && (
+              <p className="form-success">✅ Message sent! I'll get back to you soon.</p>
+            )}
+            {status === 'error' && (
+              <p className="form-error">❌ Something went wrong. Please try again.</p>
+            )}
             <div className="form-group">
               <label htmlFor="name">Name</label>
-              <input id="name" name="name" type="text" placeholder="Your name" required value={form.name} onChange={handleChange} />
+              <input id="name" name="name" type="text" placeholder="Your name" required value={form.name} onChange={handleChange} disabled={status === 'loading'} />
             </div>
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <input id="email" name="email" type="email" placeholder="your@email.com" required value={form.email} onChange={handleChange} />
+              <input id="email" name="email" type="email" placeholder="your@email.com" required value={form.email} onChange={handleChange} disabled={status === 'loading'} />
             </div>
             <div className="form-group">
               <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows={5} placeholder="Tell me about the role or project..." required value={form.message} onChange={handleChange} />
+              <textarea id="message" name="message" rows={5} placeholder="Tell me about the role or project..." required value={form.message} onChange={handleChange} disabled={status === 'loading'} />
             </div>
-            <button type="submit" className="btn-primary form-submit">Send Message →</button>
+            <button type="submit" className="btn-primary form-submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'Sending...' : 'Send Message →'}
+            </button>
           </form>
         </div>
       </div>

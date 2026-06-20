@@ -89,9 +89,16 @@
 }
 
 .form-submit { width: 100%; justify-content: center; display: flex; cursor: pointer; border: none; }
+.form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
 .form-success {
   color: var(--green);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.form-error {
+  color: #f87171;
   font-size: 0.88rem;
   font-weight: 500;
 }
