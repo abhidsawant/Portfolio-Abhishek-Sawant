@@ -110,6 +110,20 @@
   margin-top: 8px;
 }
 
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    padding: 0 16px;
+  }
+  .btn-primary, .btn-outline, .btn-download {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
 /* shimmer button */
 .btn-primary {
   background: var(--accent);
