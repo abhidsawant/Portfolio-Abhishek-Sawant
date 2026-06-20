@@ -4,7 +4,7 @@ import './Skills.css'
 const groups = [
   {
     title: 'Languages & Frameworks',
-    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'React Hooks', 'Redux', 'Node.js', 'Express.js'],
+    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'Next.js', 'React Native', 'React Hooks', 'Redux', 'Node.js', 'Express.js'],
   },
   {
     title: 'UI & Styling',
