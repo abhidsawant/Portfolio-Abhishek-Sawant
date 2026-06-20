@@ -3,8 +3,8 @@ import './About.css'
 
 const stats = [
   { value: '1+', label: 'Year Experience' },
-  { value: '50+', label: 'Bugs Resolved' },
-  { value: '7+', label: 'Major User Stories' },
+  { value: '70+', label: 'Bugs Resolved' },
+  { value: '12+', label: 'Major User Stories' },
   { value: '2', label: 'Global Pharma Clients' },
 ]
 
