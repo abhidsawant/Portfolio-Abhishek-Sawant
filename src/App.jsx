@@ -1,3 +1,5 @@
+import ScrollProgress from './components/ScrollProgress'
+import SectionDots from './components/SectionDots'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -11,6 +13,8 @@ import Footer from './components/Footer'
 export default function App() {
   return (
     <>
+      <ScrollProgress />
+      <SectionDots />
       <Navbar />
       <main>
         <Hero />

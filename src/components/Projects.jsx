@@ -1,4 +1,5 @@
 import useInView from '../hooks/useInView'
+import useTilt from '../hooks/useTilt'
 import './Projects.css'
 
 const projects = [
@@ -18,6 +19,7 @@ const projects = [
 
 export default function Projects() {
   const [ref, inView] = useInView()
+  const tilt = useTilt(5)
 
   return (
     <section id="projects" className="section projects-bg" ref={ref}>
@@ -25,7 +27,13 @@ export default function Projects() {
         <h2 className="section-title">Key Project</h2>
         <div className="projects-grid">
           {projects.map((p, i) => (
-            <div key={i} className={`card project-card reveal ${inView ? 'visible' : ''}`}>
+            <div
+              key={i}
+              ref={tilt.ref}
+              onMouseMove={tilt.onMouseMove}
+              onMouseLeave={tilt.onMouseLeave}
+              className={`card project-card reveal ${inView ? 'visible' : ''}`}
+            >
               <div className="project-header">
                 <div>
                   <h3 className="project-name">{p.name}</h3>

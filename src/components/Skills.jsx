@@ -1,10 +1,11 @@
 import useInView from '../hooks/useInView'
+import useTilt from '../hooks/useTilt'
 import './Skills.css'
 
 const groups = [
   {
     title: 'Languages & Frameworks',
-    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'Next.js', 'React Native', 'React Hooks', 'Redux', 'Node.js', 'Express.js'],
+    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'React Hooks', 'Redux', 'Node.js', 'Express.js'],
   },
   {
     title: 'UI & Styling',
@@ -24,6 +25,32 @@ const groups = [
   },
 ]
 
+function SkillCard({ group, inView, i }) {
+  const tilt = useTilt(6)
+  return (
+    <div
+      ref={tilt.ref}
+      onMouseMove={tilt.onMouseMove}
+      onMouseLeave={tilt.onMouseLeave}
+      className={`card skill-group reveal ${inView ? 'visible' : ''}`}
+      style={{ transitionDelay: `${i * 0.1}s` }}
+    >
+      <h3 className="skill-group-title">{group.title}</h3>
+      <div className="skill-tags">
+        {group.skills.map((s, j) => (
+          <span
+            key={s}
+            className={`tag skill-tag ${inView ? 'tag-visible' : ''}`}
+            style={{ animationDelay: `${0.2 + i * 0.1 + j * 0.05}s` }}
+          >
+            {s}
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Skills() {
   const [ref, inView] = useInView()
 
@@ -32,26 +59,7 @@ export default function Skills() {
       <div className="container">
         <h2 className="section-title">Technical Skills</h2>
         <div className="skills-grid">
-          {groups.map((g, i) => (
-            <div
-              key={g.title}
-              className={`card skill-group reveal ${inView ? 'visible' : ''}`}
-              style={{ transitionDelay: `${i * 0.1}s` }}
-            >
-              <h3 className="skill-group-title">{g.title}</h3>
-              <div className="skill-tags">
-                {g.skills.map((s, j) => (
-                  <span
-                    key={s}
-                    className={`tag skill-tag ${inView ? 'tag-visible' : ''}`}
-                    style={{ animationDelay: `${0.2 + i * 0.1 + j * 0.05}s` }}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+          {groups.map((g, i) => <SkillCard key={g.title} group={g} inView={inView} i={i} />)}
         </div>
       </div>
     </section>

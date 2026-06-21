@@ -1,4 +1,5 @@
 import useInView from '../hooks/useInView'
+import useTilt from '../hooks/useTilt'
 import './Experience.css'
 
 const jobs = [
@@ -34,6 +35,34 @@ const jobs = [
   },
 ]
 
+function ExpCard({ job, inView, delay }) {
+  const tilt = useTilt(5)
+  return (
+    <div
+      ref={tilt.ref}
+      onMouseMove={tilt.onMouseMove}
+      onMouseLeave={tilt.onMouseLeave}
+      className={`card exp-card reveal ${inView ? 'visible' : ''}`}
+      style={{ transitionDelay: delay }}
+    >
+      <div className="exp-header">
+        <div>
+          <h3 className="exp-role">{job.role}</h3>
+          <p className="exp-company">{job.company} · {job.location}</p>
+        </div>
+        <div className="exp-header-right">
+          {job.award && <span className="exp-award">🏆 {job.award}</span>}
+          <span className="exp-period tag">{job.period}</span>
+        </div>
+      </div>
+      <p className="exp-stack">{job.stack}</p>
+      <ul className="exp-points">
+        {job.points.map((p, j) => <li key={j}>{p}</li>)}
+      </ul>
+    </div>
+  )
+}
+
 export default function Experience() {
   const [ref, inView] = useInView()
 
@@ -43,26 +72,7 @@ export default function Experience() {
         <h2 className="section-title">Experience</h2>
         <div className="exp-list">
           {jobs.map((job, i) => (
-            <div
-              key={i}
-              className={`card exp-card reveal ${inView ? 'visible' : ''}`}
-              style={{ transitionDelay: `${i * 0.15}s` }}
-            >
-              <div className="exp-header">
-                <div>
-                  <h3 className="exp-role">{job.role}</h3>
-                  <p className="exp-company">{job.company} · {job.location}</p>
-                </div>
-                <div className="exp-header-right">
-                  {job.award && <span className="exp-award">🏆 {job.award}</span>}
-                  <span className="exp-period tag">{job.period}</span>
-                </div>
-              </div>
-              <p className="exp-stack">{job.stack}</p>
-              <ul className="exp-points">
-                {job.points.map((p, j) => <li key={j}>{p}</li>)}
-              </ul>
-            </div>
+            <ExpCard key={i} job={job} inView={inView} delay={`${i * 0.15}s`} />
           ))}
         </div>
       </div>
