@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f13"/>
+      <stop offset="100%" style="stop-color:#16161d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:#7c6aff;stop-opacity:0.25"/>
+      <stop offset="100%" style="stop-color:#0f0f13;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e8e8f0"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Border -->
+  <rect x="1" y="1" width="1198" height="628" fill="none" stroke="#2a2a38" stroke-width="2" rx="0"/>
+
+  <!-- Accent left bar -->
+  <rect x="0" y="0" width="5" height="630" fill="url(#textGrad)"/>
+
+  <!-- Dot grid pattern -->
+  <pattern id="dots" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+    <circle cx="2" cy="2" r="1" fill="#a78bfa" opacity="0.12"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <!-- Main content -->
+  <!-- AS logo badge -->
+  <rect x="80" y="80" width="72" height="72" rx="16" fill="#1e1e28" stroke="#2a2a38" stroke-width="1.5"/>
+  <text x="116" y="128" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700" fill="#a78bfa" text-anchor="middle">AS</text>
+
+  <!-- Name -->
+  <text x="80" y="230" font-family="Inter, system-ui, sans-serif" font-size="68" font-weight="700" fill="url(#textGrad)">Abhishek Sawant</text>
+
+  <!-- Title -->
+  <text x="80" y="300" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="400" fill="#a0a0b8">React.js Developer  &amp;  Frontend Engineer</text>
+
+  <!-- Divider -->
+  <rect x="80" y="330" width="120" height="3" rx="2" fill="#7c6aff"/>
+
+  <!-- Description -->
+  <text x="80" y="385" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#a0a0b8">Building high-performance clinical data platforms</text>
+  <text x="80" y="418" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#a0a0b8">for Pfizer &amp; Jazz Pharma  ·  Pune, India</text>
+
+  <!-- Award badge -->
+  <rect x="80" y="450" width="380" height="44" rx="22" fill="#0d2d22" stroke="#34d399" stroke-width="1.2" opacity="0.9"/>
+  <text x="100" y="478" font-family="Inter, system-ui, sans-serif" font-size="19" font-weight="600" fill="#34d399">🏆  Spot Award — Best Performance Q1 2026</text>
+
+  <!-- Tech tags -->
+  <rect x="80" y="520" width="120" height="34" rx="17" fill="#1e1e28" stroke="#7c6aff" stroke-width="1"/>
+  <text x="140" y="542" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="500" fill="#a78bfa" text-anchor="middle">React.js</text>
+
+  <rect x="212" y="520" width="130" height="34" rx="17" fill="#1e1e28" stroke="#7c6aff" stroke-width="1"/>
+  <text x="277" y="542" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="500" fill="#a78bfa" text-anchor="middle">TypeScript</text>
+
+  <rect x="354" y="520" width="100" height="34" rx="17" fill="#1e1e28" stroke="#7c6aff" stroke-width="1"/>
+  <text x="404" y="542" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="500" fill="#a78bfa" text-anchor="middle">Redux</text>
+
+  <rect x="466" y="520" width="110" height="34" rx="17" fill="#1e1e28" stroke="#7c6aff" stroke-width="1"/>
+  <text x="521" y="542" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="500" fill="#a78bfa" text-anchor="middle">Webpack</text>
+
+  <!-- URL -->
+  <text x="1120" y="590" font-family="Inter, system-ui, sans-serif" font-size="16" fill="#4a4a6a" text-anchor="end">portfolio-abhishek-sawant.vercel.app</text>
+</svg>
