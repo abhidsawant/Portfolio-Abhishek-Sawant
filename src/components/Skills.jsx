@@ -37,6 +37,42 @@ const skillIcons = {
   'GitHub Copilot': <SiGithub />,
 }
 
+const skillDocs = {
+  'JavaScript (ES6+)': 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+  'TypeScript': 'https://www.typescriptlang.org/docs/',
+  'React.js': 'https://react.dev',
+  'Next.js': 'https://nextjs.org/docs',
+  'React Native': 'https://reactnative.dev/docs/getting-started',
+  'React Hooks': 'https://react.dev/reference/react',
+  'Redux': 'https://redux.js.org/introduction/getting-started',
+  'Node.js': 'https://nodejs.org/en/docs',
+  'Express.js': 'https://expressjs.com/en/starter/installing.html',
+  'Material UI': 'https://mui.com/material-ui/getting-started/',
+  'Tailwind CSS': 'https://tailwindcss.com/docs',
+  'Bootstrap': 'https://getbootstrap.com/docs',
+  'Ag-Grid React': 'https://www.ag-grid.com/react-data-grid/',
+  'HTML5': 'https://developer.mozilla.org/en-US/docs/Web/HTML',
+  'CSS3': 'https://developer.mozilla.org/en-US/docs/Web/CSS',
+  'Responsive Design': 'https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design',
+  'Webpack': 'https://webpack.js.org/concepts/',
+  'Code Splitting': 'https://webpack.js.org/guides/code-splitting/',
+  'Tree Shaking': 'https://webpack.js.org/guides/tree-shaking/',
+  'Git': 'https://git-scm.com/doc',
+  'GitHub': 'https://docs.github.com',
+  'REST APIs': 'https://developer.mozilla.org/en-US/docs/Glossary/REST',
+  'CI/CD': 'https://docs.github.com/en/actions',
+  'Jest': 'https://jestjs.io/docs/getting-started',
+  'Agile/Scrum': 'https://www.scrum.org/resources/what-scrum-module',
+  'Code Reviews': 'https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews',
+  'Cross-browser Compatibility': 'https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing',
+  'MySQL': 'https://dev.mysql.com/doc/',
+  'PostgreSQL': 'https://www.postgresql.org/docs/',
+  'MongoDB': 'https://www.mongodb.com/docs/',
+  'Claude AI': 'https://docs.anthropic.com',
+  'Codex': 'https://platform.openai.com/docs/guides/code',
+  'GitHub Copilot': 'https://docs.github.com/en/copilot',
+}
+
 const groups = [
   {
     title: 'Languages & Frameworks',
@@ -97,14 +133,17 @@ function SkillCard({ group, inView, i }) {
 
       <div className="skill-tags">
         {group.skills.map((s, j) => (
-          <span
+          <a
             key={s}
+            href={skillDocs[s] || '#'}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`tag skill-tag ${inView ? 'tag-visible' : ''}`}
             style={{ animationDelay: `${0.2 + i * 0.1 + j * 0.05}s`, '--group-color': group.color }}
           >
             {skillIcons[s] && <span className="skill-icon">{skillIcons[s]}</span>}
             {s}
-          </span>
+          </a>
         ))}
       </div>
     </div>
