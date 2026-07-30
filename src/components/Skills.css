@@ -6,34 +6,78 @@
   gap: 20px;
 }
 
+/* ── Front Card ── */
 .skill-group {
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  position: relative;
+  transition: box-shadow 0.25s, border-color 0.25s;
+  border-color: var(--border);
+  height: 100%;
 }
 .skill-group:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(124,106,255,0.2);
-  border-color: rgba(124,106,255,0.4);
+  box-shadow: 0 0 0 2px var(--group-color, var(--accent)), 0 12px 40px color-mix(in srgb, var(--group-color, var(--accent)) 25%, transparent);
+  border-color: var(--group-color, var(--accent));
 }
 
+/* ── Count Badge ── */
+.skill-count-badge {
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  padding: 0 7px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* ── Category Icon ── */
 .skill-group-title {
   font-size: 0.95rem;
   color: var(--text-h);
   margin-bottom: 16px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.category-icon {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
 }
 
+/* ── Skill Tags ── */
 .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .skill-tag {
   opacity: 0;
   transform: scale(0.8);
-  transition: transform 0.15s, background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s, background 0.2s;
 }
 .skill-tag.tag-visible {
   animation: scaleIn 0.35s ease forwards;
 }
 .skill-tag:hover {
-  background: rgba(124,106,255,0.25);
+  background: color-mix(in srgb, var(--group-color, var(--accent)) 20%, transparent);
+  border-color: var(--group-color, var(--accent));
+  box-shadow: 0 0 8px color-mix(in srgb, var(--group-color, var(--accent)) 50%, transparent),
+              0 0 16px color-mix(in srgb, var(--group-color, var(--accent)) 25%, transparent);
   transform: scale(1.08);
   cursor: default;
+}
+
+/* ── Skill Icon inside tag ── */
+.skill-icon {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
 }

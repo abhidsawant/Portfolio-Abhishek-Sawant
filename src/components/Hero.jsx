@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import './Hero.css'
 
-const ROLES = ['React.js Developer', 'Frontend Engineer', 'UI Specialist', 'JavaScript Specialist', 'Node.js Enthusiast']
+const ROLES = ['React.js Developer', 'Frontend Engineer', 'UI Specialist', 'JavaScript Specialist', 'Node.js Enthusiast', 'MERN Stack Developer']
 
 function ParticleCanvas() {
   const canvasRef = useRef(null)
