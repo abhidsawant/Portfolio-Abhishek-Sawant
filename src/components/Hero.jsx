@@ -96,11 +96,11 @@ export default function Hero() {
         <h1 className="hero-name anim-2">Abhishek Sawant</h1>
         <h2 className="hero-title anim-3"><TypingText /></h2>
         <p className="hero-desc anim-4">
-          I craft fast, scalable, and accessible frontend experiences for
-          mission-critical clinical data platforms in the pharma industry.
-          Specializing in <span className="highlight">React.js</span>, <span className="highlight">Redux</span>, and <span className="highlight">TypeScript</span> —
-          with a track record of shipping complex features and squashing production
-          fires for <span className="highlight">Pfizer</span> and <span className="highlight">Jazz Pharma</span>.
+          I build fast, scalable, and accessible web applications with a strong focus on
+          clean architecture and smooth user experiences. Specializing in{' '}
+          <span className="highlight">React.js</span>, <span className="highlight">Redux</span>, and <span className="highlight">JavaScript</span> —
+          with hands-on experience across the full <span className="highlight">MERN stack</span>,
+          performance optimization, and delivering production-ready features end to end.
         </p>
         <div className="hero-award anim-5">
           <span>🏆</span>
