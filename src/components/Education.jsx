@@ -16,8 +16,8 @@ export default function Education() {
           onMouseLeave={tilt.onMouseLeave}
           className={`card edu-card reveal ${inView ? 'visible' : ''}`}
         >
-          <h3 className="edu-degree">Bachelor of Engineering — Computer Engineering</h3>
-          <p className="edu-school">International Institute of Information Technology (I²IT), Pune, India</p>
+          <h3 className="edu-degree">Bachelor of Engineering — Computer Engineering (2025)</h3>
+          <p className="edu-school">International Institute of Information Technology, Pune, India</p>
         </div>
       </div>
     </section>

@@ -1,5 +1,5 @@
+import { useState } from 'react'
 import useInView from '../hooks/useInView'
-import useTilt from '../hooks/useTilt'
 import {
   SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiRedux, SiNodedotjs, SiExpress,
   SiMaterialdesign, SiTailwindcss, SiBootstrap, SiHtml5, SiCss,
@@ -112,39 +112,48 @@ const groups = [
   },
 ]
 
-function SkillCard({ group, inView, i }) {
-  const tilt = useTilt(6)
+function TreeNode({ group, inView, i, isLast }) {
+  const [open, setOpen] = useState(false)
   return (
-    <div
-      ref={tilt.ref}
-      onMouseMove={tilt.onMouseMove}
-      onMouseLeave={tilt.onMouseLeave}
-      className={`card skill-group reveal ${inView ? 'visible' : ''}`}
-      style={{ transitionDelay: `${i * 0.1}s`, '--group-color': group.color }}
-    >
-      <span className="skill-count-badge" style={{ background: group.color }}>
-        {group.skills.length}
-      </span>
+    <div className={`tree-node reveal ${inView ? 'visible' : ''}`} style={{ transitionDelay: `${i * 0.1}s` }}>
+      {/* vertical spine */}
+      <div className="tree-spine">
+        <div className="tree-dot" style={{ background: group.color, boxShadow: `0 0 8px ${group.color}` }} />
+        {!isLast && <div className="tree-line" style={{ borderColor: group.color }} />}
+      </div>
 
-      <h3 className="skill-group-title">
-        <span className="category-icon" style={{ color: group.color }}>{group.icon}</span>
-        {group.title}
-      </h3>
+      <div className="tree-content">
+        {/* Group header */}
+        <button className="tree-header" onClick={() => setOpen(o => !o)} style={{ '--group-color': group.color }}>
+          <span className="category-icon" style={{ color: group.color }}>{group.icon}</span>
+          <span className="tree-title">{group.title}</span>
+          <span className="skill-count-badge" style={{ background: group.color }}>{group.skills.length}</span>
+          <span className="tree-chevron" style={{ transform: open ? 'rotate(90deg)' : 'rotate(0deg)' }}>▶</span>
+        </button>
 
-      <div className="skill-tags">
-        {group.skills.map((s, j) => (
-          <a
-            key={s}
-            href={skillDocs[s] || '#'}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`tag skill-tag ${inView ? 'tag-visible' : ''}`}
-            style={{ animationDelay: `${0.2 + i * 0.1 + j * 0.05}s`, '--group-color': group.color }}
-          >
-            {skillIcons[s] && <span className="skill-icon">{skillIcons[s]}</span>}
-            {s}
-          </a>
-        ))}
+        {/* Skills leaf nodes */}
+        {open && (
+          <div className="tree-leaves">
+            {group.skills.map((s, j) => (
+              <div key={s} className="tree-leaf-row">
+                <div className="leaf-connector">
+                  <div className="leaf-line" style={{ borderColor: group.color }} />
+                  <div className="leaf-dot" style={{ background: group.color }} />
+                </div>
+                <a
+                  href={skillDocs[s] || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`tag skill-tag ${inView ? 'tag-visible' : ''}`}
+                  style={{ animationDelay: `${0.2 + i * 0.1 + j * 0.05}s`, '--group-color': group.color }}
+                >
+                  {skillIcons[s] && <span className="skill-icon">{skillIcons[s]}</span>}
+                  {s}
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
@@ -157,8 +166,10 @@ export default function Skills() {
     <section id="skills" className="section skills-bg" ref={ref}>
       <div className="container">
         <h2 className="section-title">Technical Skills</h2>
-        <div className="skills-grid">
-          {groups.map((g, i) => <SkillCard key={g.title} group={g} inView={inView} i={i} />)}
+        <div className="tree-root">
+          {groups.map((g, i) => (
+            <TreeNode key={g.title} group={g} inView={inView} i={i} isLast={i === groups.length - 1} />
+          ))}
         </div>
       </div>
     </section>
