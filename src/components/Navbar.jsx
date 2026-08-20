@@ -6,10 +6,12 @@ const links = ['About', 'Skills', 'Experience', 'Projects', 'Education', 'Contac
 export default function Navbar() {
   const [open, setOpen] = useState(false)
 
+  const appTitle = "<Code.AS/>";
+
   return (
     <nav className="navbar">
       <div className="container nav-inner">
-        <a href="#hero" className="nav-logo">AS</a>
+        <a href="#hero" className="nav-logo">{appTitle}</a>
         <ul className={`nav-links ${open ? 'open' : ''}`}>
           {links.map(l => (
             <li key={l}><a href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)}>{l}</a></li>
