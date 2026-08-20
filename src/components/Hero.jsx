@@ -104,7 +104,7 @@ export default function Hero() {
         </p>
         <div className="hero-award anim-5">
           <span>🏆</span>
-          <span>Spot Award — Best Performance, UI Team · Q1 2026 · Saama Technologies</span>
+          <span>Spot Award — Best Performance, BRAIN Team · Q1 2026 · Saama Technologies</span>
         </div>
         <div className="hero-actions anim-6">
           <a href="#experience" className="btn-primary btn-shine">View Experience</a>

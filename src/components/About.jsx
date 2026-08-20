@@ -51,7 +51,7 @@ export default function About() {
             <p>
               Proficient in React Hooks, Redux, TypeScript, Ag-Grid, REST API integration, and Webpack
               optimization. Recognized with the <strong className="highlight">Q1 2026 Spot Award for Best Performance</strong> in
-              the UI team at Saama Technologies.
+              the BRAIN team at Saama Technologies.
             </p>
             <p>
               Proven track record delivering complex UI features and resolving high-priority production
