@@ -6,6 +6,20 @@
   overflow: hidden;
 }
 
+.hero-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    400px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(124, 106, 255, 0.1) 0%,
+    transparent 70%
+  );
+}
+
 .hero-canvas {
   position: absolute;
   inset: 0;
@@ -138,6 +152,10 @@
   }
 }
 
+.btn-primary, .btn-outline, .btn-download {
+  transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.2s, border-color 0.2s, color 0.2s, background 0.2s;
+}
+
 /* shimmer button */
 .btn-primary {
   background: var(--accent);
@@ -152,7 +170,6 @@
 }
 .btn-primary:hover {
   color: #fff;
-  transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(124,106,255,0.4);
 }
 .btn-shine::after {
@@ -175,7 +192,7 @@
   font-size: 0.95rem;
   transition: border-color 0.2s, transform 0.2s, color 0.2s;
 }
-.btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
+.btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
 
 .btn-download {
   border: 1px solid rgba(52, 211, 153, 0.4);
@@ -186,7 +203,7 @@
   font-size: 0.95rem;
   transition: background 0.2s, transform 0.2s;
 }
-.btn-download:hover { background: rgba(52, 211, 153, 0.1); color: var(--green); transform: translateY(-2px); }
+.btn-download:hover { background: rgba(52, 211, 153, 0.1); color: var(--green); }
 
 .hero-links {
   display: flex;

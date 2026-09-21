@@ -1,5 +1,36 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import './Hero.css'
+
+function MagneticBtn({ children, className, href, download }) {
+  const ref = useRef(null)
+
+  const onMove = useCallback(e => {
+    e.stopPropagation()
+    const el = ref.current
+    const rect = el.getBoundingClientRect()
+    const x = e.clientX - rect.left - rect.width / 2
+    const y = e.clientY - rect.top - rect.height / 2
+    el.style.transform = `translate(${x * 0.28}px, ${y * 0.28}px)`
+  }, [])
+
+  const onLeave = useCallback(e => {
+    e.stopPropagation()
+    ref.current.style.transform = ''
+  }, [])
+
+  return (
+    <a
+      ref={ref}
+      href={href}
+      download={download}
+      className={className}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+    >
+      {children}
+    </a>
+  )
+}
 
 const ROLES = ['React.js Developer', 'Frontend Engineer', 'UI Specialist', 'JavaScript Specialist', 'Node.js Enthusiast', 'MERN Stack Developer']
 
@@ -13,8 +44,8 @@ function ParticleCanvas() {
     let W, H, particles
 
     const init = () => {
-      W = canvas.width = canvas.offsetWidth
-      H = canvas.height = canvas.offsetHeight
+      W = canvas.width = window.innerWidth
+      H = canvas.height = window.innerHeight
       particles = Array.from({ length: 80 }, () => ({
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
@@ -33,7 +64,6 @@ function ParticleCanvas() {
         ctx.fillStyle = 'rgba(167,139,250,0.5)'
         ctx.fill()
       })
-      // draw lines between close particles
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
@@ -52,10 +82,11 @@ function ParticleCanvas() {
       animId = requestAnimationFrame(draw)
     }
 
+    const onResize = () => init()
+    window.addEventListener('resize', onResize)
     init()
     draw()
-    window.addEventListener('resize', init)
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', init) }
+    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', onResize) }
   }, [])
 
   return <canvas ref={canvasRef} className="hero-canvas" />
@@ -87,8 +118,29 @@ function TypingText() {
 }
 
 export default function Hero() {
+  const sectionRef = useRef(null)
+  const spotlightRef = useRef(null)
+
+  const handleSpotlight = useCallback(e => {
+    const rect = sectionRef.current.getBoundingClientRect()
+    spotlightRef.current.style.setProperty('--sx', `${e.clientX - rect.left}px`)
+    spotlightRef.current.style.setProperty('--sy', `${e.clientY - rect.top}px`)
+    spotlightRef.current.style.opacity = '1'
+  }, [])
+
+  const handleSpotlightLeave = useCallback(() => {
+    spotlightRef.current.style.opacity = '0'
+  }, [])
+
   return (
-    <section id="hero" className="hero-section">
+    <section
+      id="hero"
+      className="hero-section"
+      ref={sectionRef}
+      onMouseMove={handleSpotlight}
+      onMouseLeave={handleSpotlightLeave}
+    >
+      <div className="hero-spotlight" ref={spotlightRef} />
       <ParticleCanvas />
       <div className="hero-glow" />
       <div className="container hero-inner">
@@ -107,13 +159,13 @@ export default function Hero() {
           <span>Spot Award — Best Performance, BRAIN Team · Q1 2026 · Saama Technologies</span>
         </div>
         <div className="hero-actions anim-6">
-          <a href="#experience" className="btn-primary btn-shine">View Experience</a>
-          <a href="#contact" className="btn-outline">Hire Me</a>
-          <a href="/Abhishek_Sawant_Resume.pdf" download className="btn-download">⬇ Download Resume</a>
+          <MagneticBtn href="#projects" className="btn-primary btn-shine">View Projects</MagneticBtn>
+          <MagneticBtn href="#contact" className="btn-outline">Hire Me</MagneticBtn>
+          <MagneticBtn href="/Abhishek_Sawant_Resume.pdf" download className="btn-download">⬇ Download Resume</MagneticBtn>
         </div>
         <div className="hero-links anim-7">
           <a href="https://linkedin.com/in/abhishek-dhanaji-sawant-933639241" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-          <a href="tel:+918767570884">+91-8767570884</a>
+          <a href="https://github.com/abhidsawant" target="_blank" rel="noreferrer">GitHub ↗</a>
         </div>
       </div>
     </section>

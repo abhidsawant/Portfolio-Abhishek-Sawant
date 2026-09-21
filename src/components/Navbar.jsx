@@ -1,7 +1,8 @@
 import { useState } from 'react'
+import { SiGithub } from 'react-icons/si'
 import './Navbar.css'
 
-const links = ['About', 'Skills', 'Experience', 'Projects', 'Education', 'Contact']
+const links = ['About', 'Skills', 'Experience', 'Projects', 'GitHub', 'Education', 'Contact']
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -17,6 +18,9 @@ export default function Navbar() {
             <li key={l}><a href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)}>{l}</a></li>
           ))}
         </ul>
+        <a href="https://github.com/abhidsawant" target="_blank" rel="noreferrer" className="nav-github" aria-label="GitHub">
+          <SiGithub />
+        </a>
         <button className="hamburger" onClick={() => setOpen(o => !o)} aria-label="Toggle menu">
           <span /><span /><span />
         </button>

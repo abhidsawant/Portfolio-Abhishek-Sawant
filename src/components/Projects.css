@@ -5,7 +5,7 @@
 .project-card {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 .project-card:hover {
@@ -14,10 +14,40 @@
   border-color: rgba(124,106,255,0.4);
 }
 
-.project-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.project-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-.project-name { font-size: 1.2rem; margin-bottom: 4px; }
-.project-subtitle { color: var(--accent2); font-size: 0.88rem; }
+.project-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 2px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.project-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+.badge-production {
+  background: rgba(52,211,153,0.1);
+  color: var(--green);
+  border: 1px solid rgba(52,211,153,0.3);
+}
+.badge-personal {
+  background: rgba(124,106,255,0.1);
+  color: var(--accent2);
+  border: 1px solid rgba(124,106,255,0.3);
+}
+
+.project-name { font-size: 1.2rem; margin: 0; }
+.project-subtitle { color: var(--accent2); font-size: 0.88rem; margin-top: -6px; }
 .project-desc { line-height: 1.7; font-size: 0.93rem; }
 
 .project-highlights {
@@ -28,4 +58,35 @@
 }
 .project-highlights li { font-size: 0.9rem; line-height: 1.6; }
 
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
 .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.project-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.tag-icon { display: flex; align-items: center; font-size: 0.85em; }
+
+.project-links { display: flex; gap: 12px; flex-shrink: 0; }
+
+.proj-link {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 5px 14px;
+  border-radius: 6px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.proj-link:hover { border-color: var(--accent2); color: var(--accent2); }
+.proj-link-live { border-color: rgba(52,211,153,0.3); color: var(--green); }
+.proj-link-live:hover { border-color: var(--green); color: var(--green); }
