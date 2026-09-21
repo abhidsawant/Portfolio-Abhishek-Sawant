@@ -10,13 +10,17 @@ import GitHub from './components/GitHub'
 import Education from './components/Education'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import CommandPalette from './components/CommandPalette'
+import useCommandPalette from './hooks/useCommandPalette'
 
 export default function App() {
+  const { open, setOpen } = useCommandPalette()
+
   return (
     <>
       <ScrollProgress />
       <SectionDots />
-      <Navbar />
+      <Navbar onOpenPalette={() => setOpen(true)} />
       <main>
         <Hero />
         <About />
@@ -28,6 +32,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <CommandPalette open={open} onClose={() => setOpen(false)} />
     </>
   )
 }
