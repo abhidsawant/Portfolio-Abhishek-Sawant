@@ -106,6 +106,36 @@
   margin-top: -16px;
 }
 
+/* Tabs */
+.cs-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+  width: fit-content;
+}
+
+.cs-tab {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 7px 18px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.cs-tab:hover { color: var(--text-h); }
+.cs-tab-active {
+  background: var(--surface);
+  color: var(--text-h);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
 .cs-section { display: flex; flex-direction: column; gap: 12px; }
 
 .cs-section-title {

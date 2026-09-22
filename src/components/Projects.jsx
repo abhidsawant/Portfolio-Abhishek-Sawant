@@ -22,6 +22,21 @@ const projects = [
     problem: null,
     solution: null,
     nda: true,
+    architecture: {
+      nodes: [
+        { id: 'ui',      label: 'React UI',     icon: '⚛️',  type: 'client',  x: 50, y: 15, detail: 'React.js functional components with Hooks. Handles all user interactions, form logic, and data display for the Specifications Module.', used: ['Component rendering', 'Form handling', 'Data display'] },
+        { id: 'redux',   label: 'Redux',        icon: '🔄',  type: 'state',   x: 20, y: 40, detail: 'Redux Toolkit manages global state across Phase I–IV trial data. Ensures consistent data sync between modules.', used: ['Global state', 'Trial phase sync', 'API cache'] },
+        { id: 'aggrid',  label: 'Ag-Grid',      icon: '📊',  type: 'client',  x: 80, y: 40, detail: 'Enterprise data grid handling 10,000+ row clinical datasets at 60fps. Used for all tabular data views.', used: ['Large datasets', 'Sorting/filtering', 'Cell editing'] },
+        { id: 'api',     label: 'REST API',      icon: '🔌',  type: 'api',     x: 50, y: 60, detail: 'REST API integration with the backend clinical data services. Handles all CRUD operations for trial data.', used: ['Data fetching', 'SDTM/ADaM output', 'Auth'] },
+        { id: 'webpack', label: 'Webpack',       icon: '📦',  type: 'service', x: 20, y: 80, detail: 'Custom Webpack config with code-splitting and tree shaking. Reduced initial bundle size significantly.', used: ['Code splitting', 'Asset optimization', 'Build'] },
+        { id: 'ts',      label: 'TypeScript',    icon: '🔷',  type: 'service', x: 80, y: 80, detail: 'TypeScript throughout for type safety across complex clinical data models and API response shapes.', used: ['Type safety', 'API types', 'Component props'] },
+      ],
+      edges: [
+        { from: 'ui', to: 'redux' }, { from: 'ui', to: 'aggrid' },
+        { from: 'ui', to: 'api' },   { from: 'redux', to: 'api' },
+        { from: 'api', to: 'webpack' }, { from: 'ui', to: 'ts' },
+      ],
+    },
     role: 'Frontend Developer at Saama Technologies. Solely responsible for the Specifications Module UI — from architecture decisions to production delivery. Collaborated directly with pharma clients to gather requirements and resolve critical bugs.',
     impact: 'Resolved 70+ high-priority production bugs impacting Pfizer and Jazz Pharma submission timelines. Delivered 12+ major user stories. Received the Q1 2026 Spot Award for Best Performance in the BRAIN team.',
     highlights: [
@@ -55,6 +70,21 @@ const projects = [
     github: 'https://github.com/abhidsawant/Expense-Manager_App',
     live: null,
     badge: 'Personal',
+    architecture: {
+      nodes: [
+        { id: 'app',      label: 'React Native', icon: '📱',  type: 'client',  x: 50, y: 12, detail: 'React Native + Expo app running on iOS and Android. All screens built with functional components and TypeScript.', used: ['UI screens', 'Navigation', 'Platform APIs'] },
+        { id: 'nav',      label: 'Navigation',   icon: '🧭',  type: 'client',  x: 20, y: 35, detail: 'React Navigation with stack and tab navigators. Handles screen transitions and deep linking.', used: ['Screen routing', 'Tab bar', 'Stack navigation'] },
+        { id: 'context',  label: 'Context API',  icon: '🔄',  type: 'state',   x: 80, y: 35, detail: 'React Context for global state — expenses, categories, and theme. Persisted with AsyncStorage.', used: ['Expenses state', 'Categories', 'Theme'] },
+        { id: 'storage',  label: 'AsyncStorage', icon: '💾',  type: 'db',      x: 80, y: 62, detail: 'AsyncStorage for persistent local data. All expenses and settings survive app restarts.', used: ['Expense persistence', 'Settings', 'Categories'] },
+        { id: 'api',      label: 'Exchange API', icon: '🌐',  type: 'api',     x: 20, y: 62, detail: 'Live exchange rates fetched from a public currency API via custom useExchangeRates hook with in-memory caching.', used: ['Currency conversion', 'Rate caching', 'Multi-currency'] },
+        { id: 'i18n',     label: 'i18n',         icon: '🇳🇬',  type: 'service', x: 50, y: 85, detail: 'Full internationalisation supporting English, Spanish, French, and Hindi. Language preference persisted locally.', used: ['EN / ES / FR / HI', 'Dynamic strings', 'RTL support'] },
+      ],
+      edges: [
+        { from: 'app', to: 'nav' }, { from: 'app', to: 'context' },
+        { from: 'context', to: 'storage' }, { from: 'app', to: 'api' },
+        { from: 'api', to: 'context' }, { from: 'app', to: 'i18n' },
+      ],
+    },
   },
   {
     num: '03',
@@ -75,6 +105,20 @@ const projects = [
     github: 'https://github.com/abhidsawant/Structural-Health-Monitoring-Of-Bridges',
     live: null,
     badge: 'Personal',
+    architecture: {
+      nodes: [
+        { id: 'web',     label: 'Web UI',       icon: '🌐',  type: 'client',  x: 50, y: 12, detail: 'HTML/CSS/JavaScript frontend for uploading bridge images and viewing crack detection predictions in real time.', used: ['Image upload', 'Result display', 'User interface'] },
+        { id: 'flask',   label: 'Flask API',    icon: '🐍',  type: 'api',     x: 50, y: 38, detail: 'Python Flask server exposes a REST endpoint that accepts image uploads and returns model predictions.', used: ['Image endpoint', 'Model serving', 'Response formatting'] },
+        { id: 'model',   label: 'CNN Model',    icon: '🧠',  type: 'ml',      x: 20, y: 62, detail: 'Convolutional Neural Network trained on custom bridge surface dataset. Binary classifier: Crack / No Crack.', used: ['Image classification', 'Feature extraction', 'Prediction'] },
+        { id: 'dataset', label: 'Dataset',      icon: '🖼️',  type: 'db',      x: 80, y: 62, detail: 'Custom labeled dataset of real bridge surface photographs split into Positive (crack) and Negative (no crack) classes.', used: ['Training data', 'Validation split', 'Labeling pipeline'] },
+        { id: 'pipeline',label: 'ML Pipeline',  icon: '⚙️',  type: 'service', x: 50, y: 85, detail: 'End-to-end pipeline: data collection → preprocessing → training → validation → model export → Flask serving.', used: ['Preprocessing', 'Training loop', 'Model export'] },
+      ],
+      edges: [
+        { from: 'web', to: 'flask' }, { from: 'flask', to: 'model' },
+        { from: 'model', to: 'dataset' }, { from: 'dataset', to: 'pipeline' },
+        { from: 'pipeline', to: 'model' },
+      ],
+    },
   },
 ]
 
