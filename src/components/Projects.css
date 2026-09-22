@@ -81,12 +81,58 @@
 .proj-link {
   font-size: 0.85rem;
   font-weight: 500;
-  color: var(--text);
+  color: var(--text-h);
+  background: rgba(255,255,255,0.05);
   border: 1px solid var(--border);
   padding: 5px 14px;
   border-radius: 6px;
-  transition: border-color 0.2s, color 0.2s;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
-.proj-link:hover { border-color: var(--accent2); color: var(--accent2); }
-.proj-link-live { border-color: rgba(52,211,153,0.3); color: var(--green); }
-.proj-link-live:hover { border-color: var(--green); color: var(--green); }
+.proj-link:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+}
+.proj-link-live {
+  background: rgba(52,211,153,0.08);
+  border-color: rgba(52,211,153,0.3);
+  color: var(--green);
+}
+.proj-link-live:hover {
+  background: rgba(52,211,153,0.15);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.proj-case-study-btn {
+  width: 100%;
+  background: rgba(124,106,255,0.08);
+  border: 1px solid rgba(124,106,255,0.2);
+  color: var(--accent2);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  margin-top: 4px;
+}
+.proj-case-study-btn:hover {
+  background: rgba(124,106,255,0.15);
+  border-color: rgba(124,106,255,0.45);
+  transform: translateY(-1px);
+}
+
+.proj-case-study-nda {
+  background: rgba(245,158,11,0.05);
+  border-color: rgba(245,158,11,0.2);
+  color: #f59e0b;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.proj-case-study-nda:hover {
+  background: rgba(245,158,11,0.05);
+  border-color: rgba(245,158,11,0.2);
+  transform: none;
+}

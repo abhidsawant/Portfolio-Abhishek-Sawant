@@ -1,0 +1,209 @@
+.cs-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.2s ease;
+}
+
+.cs-modal {
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow-y: auto;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(124,106,255,0.1);
+  animation: scaleIn 0.2s ease;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* Header */
+.cs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 0;
+  position: sticky;
+  top: 0;
+  background: var(--bg2);
+  z-index: 1;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cs-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cs-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 2px;
+}
+
+.cs-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.badge-production {
+  background: rgba(52,211,153,0.1);
+  color: var(--green);
+  border: 1px solid rgba(52,211,153,0.3);
+}
+.badge-personal {
+  background: rgba(124,106,255,0.1);
+  color: var(--accent2);
+  border: 1px solid rgba(124,106,255,0.3);
+}
+
+.cs-close {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.cs-close:hover { background: rgba(255,255,255,0.1); color: var(--text-h); }
+
+/* Body */
+.cs-body {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.cs-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cs-subtitle {
+  color: var(--accent2);
+  font-size: 0.9rem;
+  margin-top: -16px;
+}
+
+.cs-section { display: flex; flex-direction: column; gap: 12px; }
+
+.cs-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent2);
+  opacity: 0.7;
+}
+
+.cs-text {
+  font-size: 0.93rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+/* Two column layout */
+.cs-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.cs-block { display: flex; flex-direction: column; gap: 10px; }
+
+/* Highlights */
+.cs-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+.cs-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.cs-highlight-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent2);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+/* Tags */
+.cs-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.cs-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.tag-icon { display: flex; align-items: center; font-size: 0.85em; }
+
+.cs-nda {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+.cs-nda-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.cs-nda-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f59e0b;
+  margin-bottom: 6px;
+}
+.cs-nda-text {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--text);
+  opacity: 0.75;
+}
+
+/* Links */
+.cs-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+.cs-link {
+  font-size: 0.9rem;
+  padding: 10px 24px;
+  border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  .cs-overlay { padding: 12px; }
+  .cs-modal { max-height: 95vh; border-radius: 12px; }
+  .cs-body { padding: 20px; gap: 22px; }
+  .cs-two-col { grid-template-columns: 1fr; gap: 20px; }
+  .cs-name { font-size: 1.3rem; }
+}
