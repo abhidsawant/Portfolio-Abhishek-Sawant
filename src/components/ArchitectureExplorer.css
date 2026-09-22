@@ -172,6 +172,38 @@
   border-radius: 20px;
 }
 
+.arch-detail-why,
+.arch-detail-tradeoff {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.arch-detail-why p,
+.arch-detail-tradeoff p {
+  font-size: 0.83rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-top: 5px;
+}
+.arch-detail-why-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green);
+  opacity: 0.8;
+  display: block;
+}
+.arch-detail-tradeoff-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #f59e0b;
+  opacity: 0.8;
+  display: block;
+}
+
 @media (max-width: 600px) {
   .arch-diagram { height: 220px; }
   .arch-node { padding: 6px 8px; min-width: 60px; }

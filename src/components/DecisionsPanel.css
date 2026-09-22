@@ -1,0 +1,123 @@
+.dp-root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.dp-card-open {
+  border-color: rgba(124,106,255,0.35);
+}
+
+.dp-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+.dp-trigger:hover .dp-title { color: var(--text-h); }
+
+.dp-trigger-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dp-chosen {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent2);
+  opacity: 0.8;
+}
+
+.dp-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: color 0.15s;
+}
+
+.dp-chevron {
+  font-size: 0.65rem;
+  color: var(--text);
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+/* Body */
+.dp-body {
+  padding: 0 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.dp-section { display: flex; flex-direction: column; gap: 8px; }
+
+.dp-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  display: block;
+}
+.dp-label-why      { color: var(--green); opacity: 0.85; }
+.dp-label-alt      { color: var(--accent2); opacity: 0.75; }
+.dp-label-tradeoff { color: #f59e0b; opacity: 0.85; }
+
+.dp-text {
+  font-size: 0.87rem;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+/* Alternatives */
+.dp-alts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dp-alt {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.dp-alt-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+.dp-alt-reason {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text);
+  opacity: 0.8;
+}
+
+.dp-section-tradeoff {
+  background: rgba(245,158,11,0.05);
+  border: 1px solid rgba(245,158,11,0.15);
+  border-radius: 8px;
+  padding: 12px 14px;
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { SiReact, SiNodedotjs, SiMongodb, SiExpress, SiTailwindcss, SiTypescript, SiRedux, SiPostgresql, SiPython } from 'react-icons/si'
 import { FaMobileAlt } from 'react-icons/fa'
 import ArchitectureExplorer from './ArchitectureExplorer'
+import DecisionsPanel from './DecisionsPanel'
 import './ProjectCaseStudy.css'
 
 const TAG_ICONS = {
@@ -50,6 +51,9 @@ export default function ProjectCaseStudy({ project, onClose }) {
             <button className={`cs-tab ${tab === 'overview' ? 'cs-tab-active' : ''}`} onClick={() => setTab('overview')}>Overview</button>
             {project.architecture && (
               <button className={`cs-tab ${tab === 'architecture' ? 'cs-tab-active' : ''}`} onClick={() => setTab('architecture')}>Architecture</button>
+            )}
+            {project.decisions && (
+              <button className={`cs-tab ${tab === 'decisions' ? 'cs-tab-active' : ''}`} onClick={() => setTab('decisions')}>Decisions</button>
             )}
           </div>
 
@@ -142,6 +146,14 @@ export default function ProjectCaseStudy({ project, onClose }) {
               <h3 className="cs-section-title">System Architecture</h3>
               <p className="cs-text" style={{ marginBottom: 16 }}>Click any node to explore how each technology fits into the system.</p>
               <ArchitectureExplorer architecture={project.architecture} />
+            </div>
+          )}
+
+          {tab === 'decisions' && (
+            <div className="cs-section">
+              <h3 className="cs-section-title">Engineering Decisions</h3>
+              <p className="cs-text" style={{ marginBottom: 16 }}>Key technology choices, the alternatives considered, and the trade-offs involved.</p>
+              <DecisionsPanel decisions={project.decisions} />
             </div>
           )}
         </div>

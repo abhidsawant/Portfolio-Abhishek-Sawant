@@ -93,6 +93,18 @@ export default function ArchitectureExplorer({ architecture }) {
                 </ul>
               </div>
             )}
+            {activeNode.why && (
+              <div className="arch-detail-why">
+                <span className="arch-detail-why-label">Why this?</span>
+                <p>{activeNode.why}</p>
+              </div>
+            )}
+            {activeNode.tradeoff && (
+              <div className="arch-detail-tradeoff">
+                <span className="arch-detail-tradeoff-label">Trade-off</span>
+                <p>{activeNode.tradeoff}</p>
+              </div>
+            )}
           </>
         ) : (
           <p className="arch-detail-hint">← Click any node to learn more</p>
