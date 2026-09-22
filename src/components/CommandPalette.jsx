@@ -13,12 +13,13 @@ const ACTIONS = [
   { id: 'github',     label: 'Open GitHub',         hint: 'External',  icon: '🐙', type: 'link', target: 'https://github.com/abhidsawant' },
   { id: 'linkedin',   label: 'Open LinkedIn',       hint: 'External',  icon: '💼', type: 'link', target: 'https://linkedin.com/in/abhishek-dhanaji-sawant-933639241' },
   { id: 'hire',       label: 'Hire Me',             hint: 'Navigate',  icon: '🤝', type: 'nav',  target: '#contact' },
+  { id: 'terminal',   label: 'Open Terminal',        hint: 'Easter Egg', icon: '⌨️', type: 'terminal' },
 ]
 
 const isMac = navigator.platform?.includes('Mac') || navigator.userAgent?.includes('Mac')
 const MOD = isMac ? '⌘' : 'Ctrl'
 
-export default function CommandPalette({ open, onClose, onOpen }) {
+export default function CommandPalette({ open, onClose, onOpen, onOpenTerminal }) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const [lastUsed, setLastUsed] = useState(null)
@@ -56,6 +57,8 @@ export default function CommandPalette({ open, onClose, onOpen }) {
     if (action.type === 'nav') {
       const el = document.querySelector(action.target)
       el?.scrollIntoView({ behavior: 'smooth' })
+    } else if (action.type === 'terminal') {
+      onOpenTerminal?.()
     } else if (action.type === 'link') {
       if (action.download) {
         const a = document.createElement('a')
@@ -125,7 +128,7 @@ export default function CommandPalette({ open, onClose, onOpen }) {
           <span className="cp-footer-sep" />
           <span className="cp-footer-item"><kbd>↵</kbd> Select</span>
           <span className="cp-footer-sep" />
-          <span className="cp-footer-item"><kbd>{MOD}</kbd><kbd>K</kbd> Toggle</span>
+          <span className="cp-footer-item"><kbd>{MOD}</kbd>+<kbd>K</kbd> Toggle</span>
           <span className="cp-footer-sep" />
           <span className="cp-footer-item"><kbd>Esc</kbd> Close</span>
         </div>

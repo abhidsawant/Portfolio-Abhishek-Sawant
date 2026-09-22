@@ -1,1 +1,32 @@
-/* Component styles are colocated in their respective CSS files */
+.term-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 88px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #0d0d0d;
+  border: 1px solid #34d399;
+  color: #34d399;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(52,211,153,0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.term-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(52,211,153,0.4);
+}
+
+@media (max-width: 768px) {
+  .term-fab {
+    right: 88px;
+    bottom: 24px;
+  }
+}

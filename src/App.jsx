@@ -11,10 +11,25 @@ import Education from './components/Education'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import CommandPalette from './components/CommandPalette'
+import Terminal from './components/Terminal'
 import useCommandPalette from './hooks/useCommandPalette'
+import { useState, useEffect } from 'react'
+import './App.css'
 
 export default function App() {
   const { open, setOpen } = useCommandPalette()
+  const [termOpen, setTermOpen] = useState(false)
+
+  useEffect(() => {
+    const onKey = e => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+        e.preventDefault()
+        setTermOpen(o => !o)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   return (
     <>
@@ -32,7 +47,16 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      <CommandPalette open={open} onClose={() => setOpen(false)} onOpen={() => setOpen(true)} />
+      <CommandPalette open={open} onClose={() => setOpen(false)} onOpen={() => setOpen(true)} onOpenTerminal={() => setTermOpen(true)} />
+      <Terminal open={termOpen} setOpen={setTermOpen} />
+      <button
+        className="term-fab"
+        onClick={() => setTermOpen(o => !o)}
+        aria-label="Toggle terminal"
+        title="Open Terminal"
+      >
+        &gt;_
+      </button>
     </>
   )
 }
