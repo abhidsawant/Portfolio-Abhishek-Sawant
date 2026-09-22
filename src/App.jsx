@@ -32,7 +32,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      <CommandPalette open={open} onClose={() => setOpen(false)} />
+      <CommandPalette open={open} onClose={() => setOpen(false)} onOpen={() => setOpen(true)} />
     </>
   )
 }

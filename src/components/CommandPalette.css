@@ -171,6 +171,37 @@
 }
 
 @media (max-width: 600px) {
-  .cp-overlay { padding-top: 8vh; }
-  .cp-footer { gap: 12px; }
+  .cp-overlay { padding-top: 5vh; }
+  .cp-modal { margin: 0 12px; }
+  .cp-footer { display: none; }
+}
+
+/* Mobile FAB */
+.cp-fab {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .cp-fab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 20px rgba(124,106,255,0.5);
+    font-size: 1.3rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cp-fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(124,106,255,0.6);
+  }
 }

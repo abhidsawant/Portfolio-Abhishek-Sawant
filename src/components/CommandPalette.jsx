@@ -18,7 +18,7 @@ const ACTIONS = [
 const isMac = navigator.platform?.includes('Mac') || navigator.userAgent?.includes('Mac')
 const MOD = isMac ? '⌘' : 'Ctrl'
 
-export default function CommandPalette({ open, onClose }) {
+export default function CommandPalette({ open, onClose, onOpen }) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const [lastUsed, setLastUsed] = useState(null)
@@ -75,7 +75,9 @@ export default function CommandPalette({ open, onClose }) {
     if (e.key === 'Escape') onClose()
   }
 
-  if (!open) return null
+  if (!open) return (
+    <button className="cp-fab" onClick={onOpen} aria-label="Open command palette">⌘</button>
+  )
 
   return (
     <div className="cp-overlay" onMouseDown={e => { if (e.target === e.currentTarget) onClose() }}>
