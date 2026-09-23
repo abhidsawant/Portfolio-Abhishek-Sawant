@@ -436,7 +436,7 @@ export default function Projects() {
                 <div className="project-tags">
                   {p.tags.map(t => (
                     <span key={t} className="tag project-tag">
-                      {TAG_ICONS[t] && <span className="tag-icon">{TAG_ICONS[t]}</span>}{t}
+                      {t}
                     </span>
                   ))}
                 </div>
