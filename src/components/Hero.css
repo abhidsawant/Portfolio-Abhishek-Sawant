@@ -210,3 +210,16 @@
   gap: 24px;
   font-size: 0.9rem;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-canvas { display: none; }
+  .hero-glow { animation: none; }
+  .hero-badge { animation: none; }
+  .hero-name { animation: fadeUp 0.7s ease 0.25s forwards; background: none; -webkit-text-fill-color: var(--text-h); }
+  .anim-1, .anim-2, .anim-3, .anim-4, .anim-5, .anim-6, .anim-7 {
+    opacity: 1;
+    animation: none;
+  }
+  .cursor { animation: none; }
+  .btn-shine::after { display: none; }
+}

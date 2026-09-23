@@ -41,6 +41,37 @@
   font-weight: 600;
   color: var(--text-h);
 }
+.gh-username-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.gh-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--green);
+  background: rgba(52,211,153,0.08);
+  border: 1px solid rgba(52,211,153,0.2);
+  border-radius: 20px;
+  padding: 2px 8px;
+  letter-spacing: 0.3px;
+}
+.gh-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  animation: gh-pulse 2s ease-in-out infinite;
+}
+@keyframes gh-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52,211,153,0.5); }
+  50%       { opacity: 0.7; box-shadow: 0 0 0 4px rgba(52,211,153,0); }
+}
 .gh-joined {
   font-size: 0.82rem;
   color: var(--text);
@@ -158,8 +189,184 @@
   justify-content: center;
 }
 
+/* Insights row */
+.gh-insights {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: start;
+}
+
+/* Contribution graph */
+.gh-contrib-wrap {
+  padding: 20px 24px;
+  overflow-x: auto;
+}
+.gh-contrib-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.gh-contrib-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent2);
+  opacity: 0.8;
+}
+.gh-contrib-count {
+  font-size: 0.78rem;
+  color: var(--text);
+  opacity: 0.55;
+}
+.gh-contrib-graph {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.gh-contrib-months {
+  display: flex;
+  align-items: center;
+}
+.gh-contrib-day-spacer {
+  width: 28px;
+  flex-shrink: 0;
+}
+.gh-contrib-month-row {
+  display: flex;
+  gap: 2px;
+}
+.gh-contrib-month-cell {
+  width: 11px;
+  font-size: 0.62rem;
+  color: var(--text);
+  opacity: 0.45;
+  white-space: nowrap;
+  overflow: visible;
+}
+.gh-contrib-body {
+  display: flex;
+  gap: 4px;
+}
+.gh-contrib-days {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.gh-contrib-day-label {
+  height: 11px;
+  font-size: 0.6rem;
+  color: var(--text);
+  opacity: 0.4;
+  line-height: 11px;
+  text-align: right;
+  padding-right: 4px;
+}
+.gh-contrib-cells {
+  display: flex;
+  gap: 2px;
+}
+.gh-contrib-week {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.gh-contrib-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.gh-cell-future { background: transparent; }
+.gh-cell--1     { background: transparent; }
+.gh-cell-0      { background: rgba(255,255,255,0.05); }
+.gh-cell-1      { background: rgba(124,106,255,0.2); }
+.gh-cell-2      { background: rgba(124,106,255,0.45); }
+.gh-cell-3      { background: rgba(124,106,255,0.7); }
+.gh-cell-4      { background: rgba(167,139,250,0.95); }
+.gh-contrib-legend {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 6px;
+  justify-content: flex-end;
+}
+.gh-contrib-legend span {
+  font-size: 0.65rem;
+  color: var(--text);
+  opacity: 0.4;
+  margin: 0 3px;
+}
+
+/* Language distribution */
+.gh-lang-wrap {
+  padding: 20px 24px;
+  min-width: 220px;
+}
+.gh-lang-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent2);
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 16px;
+}
+.gh-lang-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gh-lang-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.gh-lang-meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.gh-lang-name {
+  font-size: 0.82rem;
+  color: var(--text-h);
+  font-weight: 500;
+  flex: 1;
+}
+.gh-lang-pct {
+  font-size: 0.75rem;
+  color: var(--text);
+  opacity: 0.6;
+}
+.gh-lang-track {
+  height: 5px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.gh-lang-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s ease;
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .gh-insights { grid-template-columns: 1fr; }
+}
 @media (max-width: 600px) {
   .gh-profile { flex-direction: column; align-items: flex-start; }
   .gh-stats { gap: 20px; }
   .gh-repos { grid-template-columns: 1fr; }
+  .gh-contrib-cell { width: 9px; height: 9px; }
+  .gh-contrib-month-cell { width: 9px; }
 }

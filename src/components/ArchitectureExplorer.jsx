@@ -16,9 +16,12 @@ function Diagram({ architecture, evolution }) {
     nodeRefs.current = {}
   }, [version, data])
 
-  const measure = () => {
+  const measure = useRef(null)
+  measure.current = () => {
     if (!containerRef.current) return
     const container = containerRef.current.getBoundingClientRect()
+    // container not yet laid out — skip, ResizeObserver will retry
+    if (container.width === 0) return
     const rects = {}
     Object.entries(nodeRefs.current).forEach(([id, el]) => {
       if (!el) return
@@ -32,14 +35,26 @@ function Diagram({ architecture, evolution }) {
   }
 
   useEffect(() => {
-    // rAF ensures nodes are painted before measuring
-    const id = requestAnimationFrame(measure)
-    return () => cancelAnimationFrame(id)
+    // Double rAF: first frame commits layout, second frame paints
+    // setTimeout 300 catches cases where a CSS transition delays final layout
+    let raf1, raf2, timer
+    raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
+        measure.current()
+        // extra pass after any transition (modal scaleIn = 200ms, tab switch)
+        timer = setTimeout(() => measure.current(), 300)
+      })
+    })
+    return () => {
+      cancelAnimationFrame(raf1)
+      cancelAnimationFrame(raf2)
+      clearTimeout(timer)
+    }
   }, [data, version])
 
   useEffect(() => {
     if (!containerRef.current) return
-    const ro = new ResizeObserver(() => requestAnimationFrame(measure))
+    const ro = new ResizeObserver(() => requestAnimationFrame(() => measure.current()))
     ro.observe(containerRef.current)
     return () => ro.disconnect()
   }, [data, version])

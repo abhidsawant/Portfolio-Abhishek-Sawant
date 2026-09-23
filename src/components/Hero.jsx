@@ -1,8 +1,21 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import './Hero.css'
 
+const prefersReducedMotion = () =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+const getParticleCount = () => {
+  if (prefersReducedMotion()) return 0
+  const w = window.innerWidth
+  if (w < 640)  return 20   // mobile
+  if (w < 1024) return 40   // tablet
+  return 80                  // desktop
+}
+
 function MagneticBtn({ children, className, href, download }) {
   const ref = useRef(null)
+  // disable magnetic effect on touch-only devices
+  const isTouchOnly = !window.matchMedia('(hover: hover)').matches
 
   const onMove = useCallback(e => {
     e.stopPropagation()
@@ -24,8 +37,8 @@ function MagneticBtn({ children, className, href, download }) {
       href={href}
       download={download}
       className={className}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
+      onMouseMove={isTouchOnly ? undefined : onMove}
+      onMouseLeave={isTouchOnly ? undefined : onLeave}
     >
       {children}
     </a>
@@ -38,20 +51,27 @@ function ParticleCanvas() {
   const canvasRef = useRef(null)
 
   useEffect(() => {
+    const count = getParticleCount()
+    if (count === 0) return  // reduced-motion: skip entirely
+
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
     let animId
     let W, H, particles
 
     const init = () => {
-      W = canvas.width = window.innerWidth
+      W = canvas.width  = window.innerWidth
       H = canvas.height = window.innerHeight
-      particles = Array.from({ length: 80 }, () => ({
+      const n = getParticleCount()  // re-check on resize
+      particles = Array.from({ length: n }, () => ({
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
         r: Math.random() * 1.5 + 0.5,
       }))
     }
+
+    // connection distance scales with particle count to keep density consistent
+    const connDist = count >= 80 ? 100 : count >= 40 ? 80 : 60
 
     const draw = () => {
       ctx.clearRect(0, 0, W, H)
@@ -69,11 +89,11 @@ function ParticleCanvas() {
           const dx = particles[i].x - particles[j].x
           const dy = particles[i].y - particles[j].y
           const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 100) {
+          if (dist < connDist) {
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(167,139,250,${0.15 * (1 - dist / 100)})`
+            ctx.strokeStyle = `rgba(167,139,250,${0.15 * (1 - dist / connDist)})`
             ctx.lineWidth = 0.5
             ctx.stroke()
           }
@@ -89,18 +109,20 @@ function ParticleCanvas() {
     return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', onResize) }
   }, [])
 
+  if (getParticleCount() === 0) return null
   return <canvas ref={canvasRef} className="hero-canvas" />
 }
 
 function TypingText() {
+  const reduced = prefersReducedMotion()
   const [roleIdx, setRoleIdx] = useState(0)
-  const [text, setText] = useState('')
+  const [text, setText] = useState(reduced ? ROLES[0] : '')
   const [deleting, setDeleting] = useState(false)
 
   useEffect(() => {
+    if (reduced) return  // static text, no animation
     const full = ROLES[roleIdx]
     let timeout
-
     if (!deleting && text === full) {
       timeout = setTimeout(() => setDeleting(true), 2000)
     } else if (deleting && text === '') {
@@ -112,9 +134,9 @@ function TypingText() {
       }, deleting ? 40 : 80)
     }
     return () => clearTimeout(timeout)
-  }, [text, deleting, roleIdx])
+  }, [text, deleting, roleIdx, reduced])
 
-  return <span className="typing-text">{text}<span className="cursor">|</span></span>
+  return <span className="typing-text">{text}{!reduced && <span className="cursor">|</span>}</span>
 }
 
 export default function Hero() {
@@ -122,6 +144,7 @@ export default function Hero() {
   const spotlightRef = useRef(null)
 
   const handleSpotlight = useCallback(e => {
+    if (prefersReducedMotion()) return
     const rect = sectionRef.current.getBoundingClientRect()
     spotlightRef.current.style.setProperty('--sx', `${e.clientX - rect.left}px`)
     spotlightRef.current.style.setProperty('--sy', `${e.clientY - rect.top}px`)
