@@ -1,0 +1,256 @@
+.df-root {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Controls */
+.df-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.df-mode-toggle {
+  display: flex;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 3px;
+}
+.df-mode-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.df-mode-btn:hover { color: var(--text-h); }
+.df-mode-active {
+  background: var(--surface);
+  color: var(--text-h);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.df-mode-failure-active {
+  background: rgba(239,68,68,0.12) !important;
+  color: #f87171 !important;
+}
+
+.df-run-btn {
+  background: rgba(124,106,255,0.15);
+  border: 1px solid rgba(124,106,255,0.35);
+  color: var(--accent2);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 7px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+.df-run-btn:hover:not(:disabled) { background: rgba(124,106,255,0.25); }
+.df-run-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Failure banner */
+.df-failure-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(239,68,68,0.07);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.df-failure-banner-icon { flex-shrink: 0; }
+
+/* Diagram canvas */
+.df-canvas {
+  position: relative;
+  width: 100%;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.df-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.df-svg-edge {
+  stroke-width: 1.5;
+  fill: none;
+  transition: stroke 0.25s, stroke-width 0.25s;
+}
+.df-svg-edge-idle    { stroke: var(--border); stroke-dasharray: 4 3; }
+.df-svg-edge-active  { stroke: var(--accent2); stroke-dasharray: 6 3; stroke-width: 2; animation: df-dash 1s linear infinite; }
+.df-svg-edge-blocked { stroke: var(--border); stroke-dasharray: 4 3; opacity: 0.25; }
+
+@keyframes df-dash { to { stroke-dashoffset: -18; } }
+
+.df-svg-label {
+  font-size: 11px;
+  font-family: inherit;
+  dominant-baseline: middle;
+  transition: fill 0.25s;
+}
+.df-svg-label-idle    { fill: var(--text); opacity: 0.4; }
+.df-svg-label-active  { fill: var(--accent2); opacity: 0.9; }
+.df-svg-label-blocked { fill: var(--text); opacity: 0.15; }
+
+/* Step node */
+.df-step {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 18px;
+  min-width: 200px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  z-index: 1;
+}
+.df-step:hover { border-color: var(--accent2); }
+
+.df-step-reached {
+  border-color: var(--accent2) !important;
+  background: rgba(124,106,255,0.1) !important;
+  box-shadow: 0 0 16px rgba(124,106,255,0.2);
+  animation: df-pop 0.3s ease;
+}
+.df-step-failed {
+  border-color: #ef4444 !important;
+  background: rgba(239,68,68,0.1) !important;
+  box-shadow: 0 0 16px rgba(239,68,68,0.2);
+  animation: df-pop 0.3s ease;
+}
+.df-step-blocked {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+@keyframes df-pop {
+  0%   { transform: scale(0.96); }
+  60%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.df-step-icon  { font-size: 1.1rem; flex-shrink: 0; }
+.df-step-label { font-size: 0.88rem; font-weight: 600; color: var(--text-h); flex: 1; text-align: left; }
+
+.df-step-check { margin-left: auto; color: var(--green); font-size: 0.85rem; font-weight: 700; }
+.df-step-x     { margin-left: auto; color: #ef4444; font-size: 0.85rem; font-weight: 700; }
+.df-step-block { margin-left: auto; color: var(--text); opacity: 0.4; font-size: 0.85rem; }
+
+
+/* Failure chain */
+.df-failure-chain {
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  animation: fadeIn 0.3s ease;
+}
+.df-failure-chain-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #f87171;
+  opacity: 0.85;
+  display: block;
+  margin-bottom: 10px;
+}
+.df-failure-chain-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.df-failure-chain-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.df-failure-chain-num {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #f87171;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+/* Detail panel */
+.df-detail {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  min-height: 60px;
+  transition: border-color 0.2s;
+}
+.df-detail-visible { border-color: rgba(124,106,255,0.3); }
+.df-detail-hint {
+  font-size: 0.82rem;
+  color: var(--text);
+  opacity: 0.4;
+  text-align: center;
+  padding: 8px 0;
+}
+.df-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.df-detail-icon { font-size: 1rem; }
+.df-detail-name { font-size: 0.92rem; font-weight: 700; color: var(--text-h); flex: 1; }
+.df-detail-close {
+  background: none;
+  border: none;
+  color: var(--text);
+  opacity: 0.5;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: opacity 0.15s;
+}
+.df-detail-close:hover { opacity: 1; }
+.df-detail-desc {
+  font-size: 0.84rem;
+  line-height: 1.75;
+  color: var(--text);
+}

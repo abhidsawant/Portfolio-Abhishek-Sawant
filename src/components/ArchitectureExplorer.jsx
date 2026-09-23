@@ -1,14 +1,22 @@
 import { useState, useRef, useEffect } from 'react'
 import './ArchitectureExplorer.css'
 
-export default function ArchitectureExplorer({ architecture }) {
+function Diagram({ architecture, evolution }) {
   const [active, setActive] = useState(null)
   const [nodeRects, setNodeRects] = useState({})
+  const [version, setVersion] = useState(0)
   const containerRef = useRef(null)
   const nodeRefs = useRef({})
 
-  // Measure node center positions after render
+  const data = evolution ? evolution[version] : architecture
+
   useEffect(() => {
+    setActive(null)
+    setNodeRects({})
+    nodeRefs.current = {}
+  }, [version, data])
+
+  const measure = () => {
     if (!containerRef.current) return
     const container = containerRef.current.getBoundingClientRect()
     const rects = {}
@@ -21,13 +29,26 @@ export default function ArchitectureExplorer({ architecture }) {
       }
     })
     setNodeRects(rects)
-  }, [architecture])
+  }
 
-  if (!architecture) return null
+  useEffect(() => {
+    // rAF ensures nodes are painted before measuring
+    const id = requestAnimationFrame(measure)
+    return () => cancelAnimationFrame(id)
+  }, [data, version])
 
-  const activeNode = architecture.nodes.find(n => n.id === active)
+  useEffect(() => {
+    if (!containerRef.current) return
+    const ro = new ResizeObserver(() => requestAnimationFrame(measure))
+    ro.observe(containerRef.current)
+    return () => ro.disconnect()
+  }, [data, version])
+
+  if (!data) return null
+
+  const activeNode = data.nodes.find(n => n.id === active)
   const connectedIds = active
-    ? architecture.edges
+    ? data.edges
         .filter(e => e.from === active || e.to === active)
         .flatMap(e => [e.from, e.to])
         .filter(id => id !== active)
@@ -35,10 +56,28 @@ export default function ArchitectureExplorer({ architecture }) {
 
   return (
     <div className="arch-root">
+      {/* Version selector */}
+      {evolution && (
+        <div className="arch-evolution">
+          <div className="arch-version-pills">
+            {evolution.map((ev, i) => (
+              <button
+                key={i}
+                className={`arch-version-pill ${version === i ? 'arch-version-active' : ''}`}
+                onClick={() => setVersion(i)}
+              >
+                <span className="arch-version-tag">{ev.version}</span>
+                <span className="arch-version-label">{ev.label}</span>
+              </button>
+            ))}
+          </div>
+          <p className="arch-evolution-note">{data.note}</p>
+        </div>
+      )}
+
       <div className="arch-diagram" ref={containerRef}>
-        {/* Connections */}
         <svg className="arch-svg" aria-hidden="true">
-          {architecture.edges.map((e, i) => {
+          {data.edges.map((e, i) => {
             const from = nodeRects[e.from]
             const to   = nodeRects[e.to]
             if (!from || !to) return null
@@ -54,11 +93,10 @@ export default function ArchitectureExplorer({ architecture }) {
           })}
         </svg>
 
-        {/* Nodes */}
-        {architecture.nodes.map(node => {
-          const isActive = active === node.id
+        {data.nodes.map(node => {
+          const isActive    = active === node.id
           const isConnected = connectedIds.includes(node.id)
-          const isDimmed = active && !isActive && !isConnected
+          const isDimmed    = active && !isActive && !isConnected
           return (
             <button
               key={node.id}
@@ -75,41 +113,47 @@ export default function ArchitectureExplorer({ architecture }) {
         })}
       </div>
 
-      {/* Detail panel */}
-      <div className={`arch-detail ${activeNode ? 'arch-detail-visible' : ''}`}>
-        {activeNode ? (
-          <>
-            <div className="arch-detail-header">
-              <span className="arch-detail-icon">{activeNode.icon}</span>
-              <span className="arch-detail-name">{activeNode.label}</span>
-              <button className="arch-detail-close" onClick={() => setActive(null)}>✕</button>
-            </div>
-            <p className="arch-detail-desc">{activeNode.detail}</p>
-            {activeNode.used && (
-              <div className="arch-detail-used">
-                <span className="arch-detail-used-label">Used for</span>
-                <ul>
-                  {activeNode.used.map((u, i) => <li key={i}>{u}</li>)}
-                </ul>
+      {/* Detail panel — only show for full architecture (has detail/why/tradeoff) */}
+      {!evolution && (
+        <div className={`arch-detail ${activeNode ? 'arch-detail-visible' : ''}`}>
+          {activeNode ? (
+            <>
+              <div className="arch-detail-header">
+                <span className="arch-detail-icon">{activeNode.icon}</span>
+                <span className="arch-detail-name">{activeNode.label}</span>
+                <button className="arch-detail-close" onClick={() => setActive(null)}>✕</button>
               </div>
-            )}
-            {activeNode.why && (
-              <div className="arch-detail-why">
-                <span className="arch-detail-why-label">Why this?</span>
-                <p>{activeNode.why}</p>
-              </div>
-            )}
-            {activeNode.tradeoff && (
-              <div className="arch-detail-tradeoff">
-                <span className="arch-detail-tradeoff-label">Trade-off</span>
-                <p>{activeNode.tradeoff}</p>
-              </div>
-            )}
-          </>
-        ) : (
-          <p className="arch-detail-hint">← Click any node to learn more</p>
-        )}
-      </div>
+              <p className="arch-detail-desc">{activeNode.detail}</p>
+              {activeNode.used && (
+                <div className="arch-detail-used">
+                  <span className="arch-detail-used-label">Used for</span>
+                  <ul>
+                    {activeNode.used.map((u, i) => <li key={i}>{u}</li>)}
+                  </ul>
+                </div>
+              )}
+              {activeNode.why && (
+                <div className="arch-detail-why">
+                  <span className="arch-detail-why-label">Why this?</span>
+                  <p>{activeNode.why}</p>
+                </div>
+              )}
+              {activeNode.tradeoff && (
+                <div className="arch-detail-tradeoff">
+                  <span className="arch-detail-tradeoff-label">Trade-off</span>
+                  <p>{activeNode.tradeoff}</p>
+                </div>
+              )}
+            </>
+          ) : (
+            <p className="arch-detail-hint">← Click any node to learn more</p>
+          )}
+        </div>
+      )}
     </div>
   )
+}
+
+export default function ArchitectureExplorer({ architecture, evolution }) {
+  return <Diagram architecture={architecture} evolution={evolution} />
 }

@@ -22,7 +22,7 @@ export default function App() {
 
   useEffect(() => {
     const onKey = e => {
-      if (e.ctrlKey && e.shiftKey && e.key === 'T') {
+      if (e.ctrlKey && e.key === '`') {
         e.preventDefault()
         setTermOpen(o => !o)
       }

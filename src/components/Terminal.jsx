@@ -99,7 +99,7 @@ function processCommand(input, setOpen) {
 
 export default function Terminal({ open, setOpen }) {
   const [history, setHistory] = useState([
-    { type: 'output', text: `Welcome to Abhishek's Portfolio Terminal v2.0\nType 'help' to see available commands. Press Ctrl+Shift+T to toggle.\n` }
+    { type: 'output', text: `Welcome to Abhishek's Portfolio Terminal \nType 'help' to see available commands. Press Ctrl+Shift+T to toggle.\n` }
   ])
   const [input, setInput] = useState('')
   const [cmdHistory, setCmdHistory] = useState([])

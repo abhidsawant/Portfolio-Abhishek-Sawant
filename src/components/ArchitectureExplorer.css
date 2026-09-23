@@ -210,3 +210,52 @@
   .arch-node-icon { font-size: 1rem; }
   .arch-node-label { font-size: 0.62rem; }
 }
+
+/* Evolution version selector */
+.arch-evolution {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.arch-version-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.arch-version-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+.arch-version-pill:hover { border-color: var(--accent2); }
+.arch-version-active {
+  border-color: var(--accent2) !important;
+  background: rgba(124,106,255,0.1) !important;
+}
+.arch-version-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent2);
+  letter-spacing: 1px;
+}
+.arch-version-label {
+  font-size: 0.8rem;
+  color: var(--text-h);
+  font-weight: 500;
+}
+.arch-evolution-note {
+  font-size: 0.84rem;
+  line-height: 1.7;
+  color: var(--text);
+  background: rgba(0,0,0,0.15);
+  border-left: 2px solid var(--accent2);
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+}

@@ -3,6 +3,7 @@ import { SiReact, SiNodedotjs, SiMongodb, SiExpress, SiTailwindcss, SiTypescript
 import { FaMobileAlt } from 'react-icons/fa'
 import ArchitectureExplorer from './ArchitectureExplorer'
 import DecisionsPanel from './DecisionsPanel'
+import DataFlowExplorer from './DataFlowExplorer'
 import './ProjectCaseStudy.css'
 
 const TAG_ICONS = {
@@ -51,6 +52,9 @@ export default function ProjectCaseStudy({ project, onClose }) {
             <button className={`cs-tab ${tab === 'overview' ? 'cs-tab-active' : ''}`} onClick={() => setTab('overview')}>Overview</button>
             {project.architecture && (
               <button className={`cs-tab ${tab === 'architecture' ? 'cs-tab-active' : ''}`} onClick={() => setTab('architecture')}>Architecture</button>
+            )}
+            {project.dataFlow && (
+              <button className={`cs-tab ${tab === 'dataflow' ? 'cs-tab-active' : ''}`} onClick={() => setTab('dataflow')}>Data Flow</button>
             )}
             {project.decisions && (
               <button className={`cs-tab ${tab === 'decisions' ? 'cs-tab-active' : ''}`} onClick={() => setTab('decisions')}>Decisions</button>
@@ -146,6 +150,21 @@ export default function ProjectCaseStudy({ project, onClose }) {
               <h3 className="cs-section-title">System Architecture</h3>
               <p className="cs-text" style={{ marginBottom: 16 }}>Click any node to explore how each technology fits into the system.</p>
               <ArchitectureExplorer architecture={project.architecture} />
+              {project.evolution && (
+                <>
+                  <h3 className="cs-section-title" style={{ marginTop: 28 }}>Architecture Evolution</h3>
+                  <p className="cs-text" style={{ marginBottom: 16 }}>How the architecture changed over time and why.</p>
+                  <ArchitectureExplorer evolution={project.evolution} />
+                </>
+              )}
+            </div>
+          )}
+
+          {tab === 'dataflow' && (
+            <div className="cs-section">
+              <h3 className="cs-section-title">Data Flow</h3>
+              <p className="cs-text" style={{ marginBottom: 16 }}>Press Run Flow to animate the request through the system. Switch to Failure Mode to see how errors are handled.</p>
+              <DataFlowExplorer dataFlow={project.dataFlow} />
             </div>
           )}
 

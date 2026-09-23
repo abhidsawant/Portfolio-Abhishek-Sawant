@@ -135,7 +135,7 @@
 @media (max-width: 600px) {
   .term-overlay { padding: 0; align-items: flex-end; }
   .term-window {
-    max-width: 100%;
+    max-width: 90%;
     height: 70vh;
     border-radius: 16px 16px 0 0;
   }
