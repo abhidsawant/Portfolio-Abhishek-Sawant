@@ -401,6 +401,268 @@ const projects = [
       ],
     },
   },
+  {
+    num: '04',
+    name: 'Tender Management System',
+    subtitle: 'Full Stack Java · JSP / Servlets · MySQL',
+    desc: 'A web-based tender management platform that allows organizations to create and manage tenders, manage vendors, and handle the bidding process through separate administrator and vendor workflows.',
+
+    problem:
+      'Managing tenders, vendors, and bids manually can make the procurement process difficult to track and manage. The system needed a centralized platform where administrators could manage tenders and vendors while vendors could discover tenders and submit bids.',
+
+    solution:
+      'Built a role-based tender management system with separate administrator and vendor workflows. Administrators can manage tenders and vendors and review bids, while vendors can register, view available tenders, submit bids, and track their bidding history.',
+
+    role:
+      'Full-stack developer — designed and implemented the application workflow, backend functionality, database integration, and frontend interfaces.',
+
+    impact:
+      'Demonstrates practical experience building a database-driven full-stack application with role-based workflows, CRUD operations, authentication, and tender bidding functionality.',
+
+    highlights: [
+      'Administrator and Vendor role-based workflows',
+      'Tender creation and management',
+      'Vendor registration and management',
+      'Vendor bidding against available tenders',
+      'Bid history and tender tracking',
+      'MySQL database integration',
+      'Search and management functionality',
+    ],
+
+    tags: [
+      'Java',
+      'JSP',
+      'Servlets',
+      'MySQL',
+      'HTML',
+      'CSS',
+      'JavaScript',
+    ],
+
+    decisions: [
+      {
+        title: 'Why Java for the backend?',
+        chosen: 'Java',
+        why:
+          'Java provided a structured environment for implementing the business logic, request handling, and database-driven workflows required by the application.',
+
+        alternatives: [
+          {
+            name: 'Node.js',
+            reason:
+              'Could provide a JavaScript-based backend, but Java was used for this project to build experience with enterprise-style backend development.',
+          },
+          {
+            name: 'Python',
+            reason:
+              'Could simplify backend development, but Java was chosen for the project requirements and learning objectives.',
+          },
+        ],
+
+        tradeoff:
+          'The Java web stack requires more configuration than lightweight modern frameworks, but it provides a clear separation between application layers.',
+      },
+
+      {
+        title: 'Why MySQL?',
+        chosen: 'MySQL',
+        why:
+          'The application manages structured entities such as tenders, vendors, and bids, making a relational database a natural fit.',
+
+        alternatives: [
+          {
+            name: 'MongoDB',
+            reason:
+              'A document database could work, but the relationships between tenders, vendors, and bids are naturally represented using relational tables.',
+          },
+        ],
+
+        tradeoff:
+          'A relational schema requires careful handling of relationships and queries, but provides strong consistency for transactional data.',
+      },
+    ],
+
+    dataFlow: {
+      steps: [
+        {
+          id: 'user',
+          label: 'User',
+          icon: '👤',
+          detail:
+            'Administrator or vendor accesses the application and performs an operation.',
+        },
+        {
+          id: 'web',
+          label: 'Web UI',
+          icon: '🌐',
+          detail:
+            'The frontend provides interfaces for authentication, tender management, vendor management, and bidding.',
+        },
+        {
+          id: 'server',
+          label: 'Java Server',
+          icon: '☕',
+          detail:
+            'The Java backend receives requests, processes business logic, validates input, and communicates with the database.',
+        },
+        {
+          id: 'database',
+          label: 'MySQL',
+          icon: '🗄️',
+          detail:
+            'Stores application data such as users, vendors, tenders, and bids.',
+        },
+        {
+          id: 'result',
+          label: 'Response',
+          icon: '✅',
+          detail:
+            'The processed result is returned to the web interface and displayed to the user.',
+        },
+      ],
+
+      edges: [
+        { from: 'user', to: 'web', label: 'User action' },
+        { from: 'web', to: 'server', label: 'HTTP request' },
+        { from: 'server', to: 'database', label: 'Query / update' },
+        { from: 'database', to: 'server', label: 'Data' },
+        { from: 'server', to: 'result', label: 'Response' },
+      ],
+
+      failureNode: 'database',
+
+      failureSteps: [
+        'Database connection or query fails',
+        'Server catches the database error',
+        'Operation is not completed',
+        'An appropriate error response is returned to the UI',
+        'User is informed that the operation could not be completed',
+      ],
+
+      failureNote:
+        'Database failures should be handled at the server layer so that database errors are not exposed directly to the user.',
+    },
+
+    evolution: [
+      {
+        version: 'V1',
+        label: 'Core Application',
+        note:
+          'Established the core tender, vendor, and bidding workflows with database-backed operations.',
+
+        nodes: [
+          {
+            id: 'web',
+            label: 'Web UI',
+            icon: '🌐',
+            type: 'client',
+            x: 50,
+            y: 25,
+          },
+          {
+            id: 'server',
+            label: 'Java Server',
+            icon: '☕',
+            type: 'api',
+            x: 50,
+            y: 60,
+          },
+          {
+            id: 'database',
+            label: 'MySQL',
+            icon: '🗄️',
+            type: 'db',
+            x: 50,
+            y: 90,
+          },
+        ],
+
+        edges: [
+          { from: 'web', to: 'server' },
+          { from: 'server', to: 'database' },
+        ],
+      },
+    ],
+
+    github:
+      'https://github.com/abhidsawant/Tender-Management-System',
+
+    live:
+      null,
+
+    badge: 'Personal',
+
+    architecture: {
+      nodes: [
+        {
+          id: 'web',
+          label: 'Web UI',
+          icon: '🌐',
+          type: 'client',
+          x: 50,
+          y: 15,
+          detail:
+            'Web interface through which administrators and vendors interact with the tender management system.',
+          used: [
+            'User interaction',
+            'Tender management',
+            'Vendor workflows',
+            'Bidding workflows',
+          ],
+          why:
+            'A server-rendered web interface was sufficient for the application and kept the project architecture straightforward.',
+          tradeoff:
+            'The traditional web architecture requires page-level server interactions compared with a modern SPA architecture.',
+        },
+
+        {
+          id: 'server',
+          label: 'Java Server',
+          icon: '☕',
+          type: 'api',
+          x: 50,
+          y: 45,
+          detail:
+            'Java backend responsible for request handling, business logic, authentication workflows, and database communication.',
+          used: [
+            'Business logic',
+            'Request handling',
+            'Authentication',
+            'Database operations',
+          ],
+          why:
+            'Java provides a structured environment for implementing the backend business logic and database-driven application workflows.',
+          tradeoff:
+            'The Java web stack involves more configuration than lightweight modern backend frameworks.',
+        },
+
+        {
+          id: 'database',
+          label: 'MySQL',
+          icon: '🗄️',
+          type: 'db',
+          x: 50,
+          y: 75,
+          detail:
+            'Relational database used to persist application data such as vendors, tenders, and bids.',
+          used: [
+            'Persistent storage',
+            'Relationships',
+            'Tender data',
+            'Vendor data',
+            'Bid data',
+          ],
+          why: `The application's structured and relational data model makes MySQL a suitable choice.`,
+          tradeoff: 'The relational model requires explicit schema and relationship management.',
+        },
+      ],
+
+      edges: [
+        { from: 'web', to: 'server' },
+        { from: 'server', to: 'database' },
+      ],
+    },
+  }
 ]
 
 export default function Projects() {
