@@ -6,6 +6,7 @@ import {
   SiWebpack, SiGit, SiGithub,
   SiJest, SiMysql, SiPostgresql, SiMongodb,
 } from 'react-icons/si'
+import { TbAtom2 } from 'react-icons/tb'
 import { FaMobileAlt, FaCode, FaPalette, FaTools, FaFlask, FaDatabase, FaRobot, FaBrain } from 'react-icons/fa'
 import { SiAnthropic } from 'react-icons/si'
 import './Skills.css'
@@ -35,6 +36,7 @@ const skillIcons = {
   'Claude AI': <SiAnthropic />,
   'Codex': <FaBrain />,
   'GitHub Copilot': <SiGithub />,
+  'Zustand': <TbAtom2 />,
 }
 
 const skillDocs = {
@@ -71,6 +73,7 @@ const skillDocs = {
   'Claude AI': 'https://docs.anthropic.com',
   'Codex': 'https://platform.openai.com/docs/guides/code',
   'GitHub Copilot': 'https://docs.github.com/en/copilot',
+  'Zustand': "https://zustand.docs.pmnd.rs",
 }
 
 const groups = [
@@ -78,7 +81,7 @@ const groups = [
     title: 'Languages & Frameworks',
     icon: <FaCode />,
     color: '#7c6aff',
-    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'Next.js', 'React Native', 'React Hooks', 'Redux', 'Node.js', 'Express.js'],
+    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'Next.js', 'React Native', 'React Hooks', 'Redux', 'Zustand', 'Node.js', 'Express.js'],
   },
   {
     title: 'UI & Styling',

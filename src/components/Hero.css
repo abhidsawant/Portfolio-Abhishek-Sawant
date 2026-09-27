@@ -10,17 +10,59 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
   background: radial-gradient(
-    400px circle at var(--sx, 50%) var(--sy, 50%),
-    rgba(124, 106, 255, 0.1) 0%,
+    350px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(167, 139, 250, 0.08) 0%,
+    rgba(124, 106, 255, 0.04) 40%,
     transparent 70%
   );
 }
 
-.hero-canvas {
+.typing-text {
+  color: var(--accent2);
+  font-weight: 500;
+}
+
+.hero-glow-purple {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70vw;
+  height: 60vh;
+  background: radial-gradient(ellipse, rgba(124,106,255,0.2) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: glow-drift-purple 20s ease-in-out infinite alternate;
+}
+
+.hero-glow-green {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50vw;
+  height: 40vh;
+  background: radial-gradient(ellipse, rgba(52,211,153,0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: glow-drift-green 18s ease-in-out infinite alternate;
+}
+
+@keyframes glow-drift-purple {
+  0%   { transform: translateX(-60%) translateY(0px); }
+  100% { transform: translateX(-40%) translateY(30px); }
+}
+
+@keyframes glow-drift-green {
+  0%   { transform: translateX(-55%) translateY(0px); }
+  100% { transform: translateX(-45%) translateY(-20px); }
+}
+
+.hero-circuit {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -29,22 +71,75 @@
   z-index: 0;
 }
 
-.typing-text {
-  color: var(--accent2);
-  font-weight: 500;
+.circuit-path-group path {
+  fill: none;
+  stroke: rgba(124,106,255,0.12);
+  stroke-width: 0.8;
+  transition: stroke 0.4s ease, stroke-width 0.4s ease;
 }
 
-.hero-glow {
-  position: absolute;
-  top: -120px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 700px;
-  height: 500px;
-  background: radial-gradient(ellipse, rgba(124,106,255,0.22) 0%, transparent 70%);
-  pointer-events: none;
-  animation: float 6s ease-in-out infinite;
+.circuit-node {
+  fill: rgba(124,106,255,0.18);
+  transition: fill 0.4s ease, filter 0.4s ease;
 }
+
+.circuit-pad {
+  fill: none;
+  stroke: rgba(124,106,255,0.18);
+  stroke-width: 0.8;
+  transition: fill 0.4s ease, stroke 0.4s ease, filter 0.4s ease;
+}
+
+/* lit state — cursor is near this group */
+.circuit-path-group.lit path {
+  stroke: rgba(167,139,250,0.6);
+  stroke-width: 1.2;
+}
+
+.circuit-path-group.lit .circuit-node {
+  fill: rgba(167,139,250,1);
+  filter: url(#node-glow);
+}
+
+.circuit-path-group.lit .circuit-pad {
+  fill: rgba(167,139,250,0.2);
+  stroke: rgba(167,139,250,0.8);
+  filter: url(#node-glow);
+}
+
+/* travelling pulse on lit paths */
+.circuit-path-group.lit path {
+  stroke-dasharray: 6 120;
+  stroke-dashoffset: 0;
+  animation: circuit-pulse 2s linear infinite;
+}
+
+@keyframes circuit-pulse {
+  from { stroke-dashoffset: 126; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.hero-os-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: rgba(167,139,250,0.15);
+  letter-spacing: 0.08em;
+  user-select: none;
+}
+
+.hero-os-labels span {
+  position: absolute;
+}
+
+.hero-os-labels span:nth-child(1) { top: 10%;    left: 5%; }
+.hero-os-labels span:nth-child(2) { top: 10%;    right: 5%; }
+.hero-os-labels span:nth-child(3) { bottom: 12%; left: 5%; }
+.hero-os-labels span:nth-child(4) { bottom: 12%; right: 5%; }
+.hero-os-labels span:nth-child(5) { bottom: 20%; left: 50%; transform: translateX(-50%); }
 
 .hero-inner {
   text-align: center;
@@ -211,9 +306,13 @@
   font-size: 0.9rem;
 }
 
+@media (max-width: 768px) {
+  .hero-os-labels { display: none; }
+  .hero-circuit { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-canvas { display: none; }
-  .hero-glow { animation: none; }
+  .hero-glow-purple, .hero-glow-green { animation: none; }
   .hero-badge { animation: none; }
   .hero-name { animation: fadeUp 0.7s ease 0.25s forwards; background: none; -webkit-text-fill-color: var(--text-h); }
   .anim-1, .anim-2, .anim-3, .anim-4, .anim-5, .anim-6, .anim-7 {

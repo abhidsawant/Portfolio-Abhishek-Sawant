@@ -45,17 +45,24 @@ export default function About() {
             style={{ transition: 'box-shadow 0.25s, border-color 0.25s, opacity 0.6s ease, transform 0.6s ease' }}
           >
             <p>
-              Results-driven React.js Developer with 1+ year of experience building high-performance,
-              scalable frontend applications for clinical data platforms in the pharmaceutical domain.
+              I’m a <strong className="highlight">React.js & MERN Stack Developer</strong> with
+              1+ year of professional experience building scalable, high-performance
+              frontend applications for clinical data platforms in the pharmaceutical domain.
             </p>
+
             <p>
-              Proficient in React Hooks, Redux, TypeScript, Ag-Grid, REST API integration, and Webpack
-              optimization. Recognized with the <strong className="highlight">Q1 2026 Spot Award for Best Performance</strong> in
-              the BRAIN team at Saama Technologies.
+              My core expertise includes <strong className="highlight">React, JavaScript, Redux,
+              React Hooks, AG-Grid, REST APIs, and Webpack</strong>, along with hands-on
+              knowledge of the <strong className="highlight">MERN stack — MongoDB, Express.js,
+              React, and Node.js</strong>.
             </p>
+
             <p>
-              Proven track record delivering complex UI features and resolving high-priority production
-              issues for global pharma clients including <strong className="highlight">Pfizer</strong> and <strong className="highlight">Jazz Pharma</strong>.
+              I enjoy building clean, reusable interfaces and full-stack applications,
+              solving complex engineering problems, and improving application performance.
+              At Saama Technologies, I was recognized with the
+              <strong className="highlight"> Q1 2026 Spot Award for Best Performance</strong>
+              as part of the BRAIN team.
             </p>
           </div>
           <div className="about-stats">
