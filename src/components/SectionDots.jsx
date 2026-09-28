@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './SectionDots.css'
 
-const sections = ['hero', 'about', 'skills', 'experience', 'projects', 'education', 'contact']
+const sections = ['hero', 'about', 'skills', 'experience', 'projects', 'github', 'education', 'contact']
 
 export default function SectionDots() {
   const [active, setActive] = useState('hero')

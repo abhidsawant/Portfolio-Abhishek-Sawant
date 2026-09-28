@@ -7,7 +7,7 @@ const MOD = isMac ? '⌘' : 'Ctrl'
 
 const links = ['About', 'Skills', 'Experience', 'Projects', 'GitHub', 'Education', 'Contact']
 
-export default function Navbar({ onOpenPalette }) {
+export default function Navbar({ onOpenPalette, recruiterMode, onToggleRecruiter }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState('')
@@ -36,31 +36,47 @@ export default function Navbar({ onOpenPalette }) {
     <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="container nav-inner">
         <a href="#hero" className="nav-logo">{appTitle}</a>
-        <ul className={`nav-links ${open ? 'open' : ''}`}>
-          {links.map(l => (
-            <li key={l}>
-              <a
-                href={`#${l.toLowerCase()}`}
-                className={active === l.toLowerCase() ? 'active' : ''}
-                onClick={() => setOpen(false)}
-              >{l}</a>
-            </li>
-          ))}
-        </ul>
-        <a href="https://github.com/abhidsawant" target="_blank" rel="noreferrer" className="nav-github" aria-label="GitHub">
-          <SiGithub />
-        </a>
-        <button className="nav-cmd" onClick={onOpenPalette} aria-label="Open command palette">
-          <span className="nav-cmd-text">Search...</span>
-          <span className="nav-cmd-kbd">
-            <kbd>{MOD}</kbd>
-            <span className="nav-cmd-plus">+</span>
-            <kbd>K</kbd>
-          </span>
+        {!recruiterMode && (
+          <ul className={`nav-links ${open ? 'open' : ''}`}>
+            {links.map(l => (
+              <li key={l}>
+                <a
+                  href={`#${l.toLowerCase()}`}
+                  className={active === l.toLowerCase() ? 'active' : ''}
+                  onClick={() => setOpen(false)}
+                >{l}</a>
+              </li>
+            ))}
+          </ul>
+        )}
+        {!recruiterMode && (
+          <a href="https://github.com/abhidsawant" target="_blank" rel="noreferrer" className="nav-github" aria-label="GitHub">
+            <SiGithub />
+          </a>
+        )}
+        {!recruiterMode && (
+          <button className="nav-cmd" onClick={onOpenPalette} aria-label="Open command palette">
+            <span className="nav-cmd-text">Search...</span>
+            <span className="nav-cmd-kbd">
+              <kbd>{MOD}</kbd>
+              <span className="nav-cmd-plus">+</span>
+              <kbd>K</kbd>
+            </span>
+          </button>
+        )}
+        <button
+          className={`nav-recruiter-btn${recruiterMode ? ' active' : ''}`}
+          onClick={onToggleRecruiter}
+          aria-label="Toggle recruiter mode"
+          title={recruiterMode ? 'Exit Recruiter Mode' : 'Recruiter Mode'}
+        >
+          👔
         </button>
-        <button className="hamburger" onClick={() => setOpen(o => !o)} aria-label="Toggle menu">
-          <span /><span /><span />
-        </button>
+        {!recruiterMode && (
+          <button className="hamburger" onClick={() => setOpen(o => !o)} aria-label="Toggle menu">
+            <span /><span /><span />
+          </button>
+        )}
       </div>
     </nav>
   )

@@ -1,0 +1,235 @@
+.rv-wrapper {
+  min-height: 100vh;
+  padding: 80px 0 60px;
+  background: var(--bg);
+}
+
+.rv-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* Header */
+.rv-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.rv-badge {
+  display: inline-block;
+  background: rgba(124, 106, 255, 0.15);
+  border: 1px solid rgba(124, 106, 255, 0.4);
+  color: var(--accent2);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.rv-name {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--text-h);
+  margin: 0;
+}
+
+.rv-title {
+  color: var(--accent2);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.rv-summary {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0;
+  opacity: 0.85;
+}
+
+.rv-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.rv-btn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.rv-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.rv-btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.rv-btn-outline {
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  background: rgba(255,255,255,0.03);
+}
+.rv-btn-outline:hover {
+  border-color: rgba(124,106,255,0.5);
+  background: rgba(124,106,255,0.07);
+}
+
+/* Stats */
+.rv-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.rv-stat {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rv-stat-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent2);
+}
+
+.rv-stat-label {
+  font-size: 0.78rem;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+/* Sections */
+.rv-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Skills */
+.rv-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rv-skill-tag {
+  background: rgba(124, 106, 255, 0.1);
+  border: 1px solid rgba(124, 106, 255, 0.25);
+  color: var(--text-h);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.83rem;
+  font-weight: 500;
+}
+
+/* Experience */
+.rv-job {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+.rv-job:last-child { margin-bottom: 0; }
+
+.rv-job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.rv-job-role {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0 0 2px;
+}
+
+.rv-job-company {
+  font-size: 0.85rem;
+  color: var(--text);
+  opacity: 0.7;
+  margin: 0;
+}
+
+.rv-job-period {
+  font-size: 0.78rem;
+  color: var(--accent2);
+  background: rgba(124,106,255,0.1);
+  border: 1px solid rgba(124,106,255,0.2);
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.rv-job-award {
+  font-size: 0.82rem;
+  color: #f59e0b;
+  margin: 0 0 10px;
+}
+
+.rv-job-points {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rv-job-points li {
+  font-size: 0.88rem;
+  color: var(--text);
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* Contact */
+.rv-contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rv-contact-links a {
+  color: var(--text);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s;
+  opacity: 0.85;
+}
+.rv-contact-links a:hover { color: var(--accent2); opacity: 1; }
+
+/* Responsive */
+@media (max-width: 640px) {
+  .rv-stats { grid-template-columns: repeat(2, 1fr); }
+  .rv-job-header { flex-direction: column; }
+}
