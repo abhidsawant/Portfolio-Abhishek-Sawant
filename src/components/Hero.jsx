@@ -235,6 +235,7 @@ export default function Hero() {
       <div className="hero-spotlight" ref={spotlightRef} />
       <div className="hero-glow-purple" />
       <div className="hero-glow-green" />
+      <div className="hero-avatar-bg" />
       <CircuitLines mousePos={mousePos} />
       <div className="hero-os-labels" aria-hidden="true">
         <span>SYS://PORTFOLIO</span>

@@ -62,6 +62,18 @@
   100% { transform: translateX(-45%) translateY(-20px); }
 }
 
+.hero-avatar-bg {
+  position: absolute;
+  inset: 0;
+  background: url('/avatar.png') center 20% / cover no-repeat;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse 70% 90% at 50% 40%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 90% at 50% 40%, black 30%, transparent 75%);
+  filter: grayscale(100%) contrast(1.2);
+}
+
 .hero-circuit {
   position: absolute;
   inset: 0;
