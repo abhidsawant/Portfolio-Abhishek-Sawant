@@ -19,7 +19,8 @@ export default function Navbar({ onOpenPalette, recruiterMode, onToggleRecruiter
   }, [])
 
   useEffect(() => {
-    const sections = links.map(l => document.getElementById(l.toLowerCase())).filter(Boolean)
+    const ids = ['hero', ...links.map(l => l.toLowerCase())]
+    const sections = ids.map(id => document.getElementById(id)).filter(Boolean)
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id) })
