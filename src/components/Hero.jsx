@@ -1,5 +1,28 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
+import useTilt from '../hooks/useTilt'
 import './Hero.css'
+
+function HaloRing() {
+  return (
+    <svg className="hero-halo" viewBox="0 0 500 500" aria-hidden="true">
+      <defs>
+        <linearGradient id="halo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stopColor="#22d3ee" stopOpacity="0.95" />
+          <stop offset="45%"  stopColor="#7c6aff" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#22d3ee" stopOpacity="0.0" />
+        </linearGradient>
+        <linearGradient id="halo-grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#7c6aff" stopOpacity="0.8" />
+          <stop offset="50%"  stopColor="#22d3ee" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#7c6aff" stopOpacity="0.0" />
+        </linearGradient>
+      </defs>
+      <circle cx="250" cy="250" r="210" fill="none" stroke="url(#halo-grad)"  strokeWidth="1.2" className="halo-ring halo-ring-1" />
+      <circle cx="250" cy="250" r="230" fill="none" stroke="url(#halo-grad2)" strokeWidth="0.6" className="halo-ring halo-ring-2" />
+      <circle cx="250" cy="250" r="190" fill="none" stroke="rgba(34,211,238,0.4)"  strokeWidth="1" strokeDasharray="4 14" className="halo-ring halo-ring-3" />
+    </svg>
+  )
+}
 
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -180,6 +203,7 @@ export default function Hero() {
   const sectionRef = useRef(null)
   const spotlightRef = useRef(null)
   const [mousePos, setMousePos] = useState({ x: -999, y: -999 })
+  const tilt = useTilt(5)
 
   const handleMouseMove = useCallback(e => {
     if (prefersReducedMotion()) return
@@ -219,7 +243,8 @@ export default function Hero() {
         <span>BUILD://2026</span>
         <span>MODE://ENGINEERING</span>
       </div>
-      <div className="container hero-inner">
+      <div className="container hero-inner" ref={tilt.ref} onMouseMove={tilt.onMouseMove} onMouseLeave={tilt.onMouseLeave}>
+        <HaloRing />
         <div className="hero-badge tag anim-1">✦ Available for Opportunities</div>
         <h1 className="hero-name anim-2">Abhishek Sawant</h1>
         <h2 className="hero-title anim-3"><TypingText /></h2>

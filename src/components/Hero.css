@@ -151,6 +151,50 @@
   padding-bottom: 80px;
   position: relative;
   z-index: 1;
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out;
+  will-change: transform;
+}
+
+/* Halo ring behind the name */
+.hero-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  width: min(520px, 90vw);
+  height: min(520px, 90vw);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.halo-ring {
+  transform-origin: 250px 250px;
+}
+
+.halo-ring-1 {
+  stroke-dasharray: 420 900;
+  animation: halo-spin 12s linear infinite;
+}
+
+.halo-ring-2 {
+  stroke-dasharray: 280 1100;
+  animation: halo-spin 18s linear infinite reverse;
+}
+
+.halo-ring-3 {
+  animation: halo-spin 20s linear infinite reverse;
+}
+
+@keyframes halo-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* push all direct children in front of halo */
+.hero-inner > *:not(.hero-halo) {
+  position: relative;
+  z-index: 1;
 }
 
 /* staggered entrance */
@@ -321,4 +365,6 @@
   }
   .cursor { animation: none; }
   .btn-shine::after { display: none; }
+  .halo-ring { animation: none; }
+  .hero-inner { transition: none; }
 }
